@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeoTaste · KI-Abschlussprüfung · Sven Preuß · MOD Education 2026</title>
+<style>
+:root {
+  --bg:#08090f; --bg2:#0f1118; --panel:#13161f; --panel2:#1a1e2a; --line:#222633;
+  --tx:#e8eaf0; --mut:#8892a4; --mut2:#5a6272;
+  --green:#4ade80; --green2:#166534; --blue:#60a5fa; --purple:#a78bfa;
+  --magenta:#ec4899; --yellow:#fbbf24; --red:#f87171; --teal:#2dd4bf;
+  --sans:"Segoe UI",system-ui,-apple-system,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);line-height:1.65;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline;color:var(--green)}
+
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:50;background:rgba(8,9,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:4px;height:52px;flex-wrap:nowrap;overflow-x:auto}
+.nav-logo{font-family:var(--serif);font-weight:700;font-size:15px;margin-right:12px;color:var(--green);white-space:nowrap;flex-shrink:0}
+.nav-inner a{font-size:12px;color:var(--mut);padding:5px 9px;border-radius:7px;white-space:nowrap;flex-shrink:0;transition:color .2s ease,background .2s ease}
+.nav-inner a:hover{color:#fff;background:var(--panel2);text-decoration:none}
+.nav-inner a.active{color:var(--green) !important;background:rgba(74,222,128,.12) !important;font-weight:700}
+.nav-sep{color:var(--line);font-size:14px;flex-shrink:0}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+section{padding:64px 0;border-top:1px solid var(--line)}
+.kick{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--purple);font-weight:700;margin-bottom:12px}
+h1{font-family:var(--serif);font-size:clamp(30px,5vw,54px);font-weight:700;line-height:1.1}
+h2{font-family:var(--serif);font-size:clamp(22px,3.5vw,36px);font-weight:700;line-height:1.15;margin-bottom:6px}
+h3{font-size:17px;font-weight:700;margin-bottom:6px}
+.lead{color:var(--mut);font-size:16px;max-width:800px;margin-top:8px;line-height:1.7}
+.em{color:var(--green);font-style:italic}
+
+/* ── HERO ── */
+.hero{padding:64px 0 48px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(74,222,128,.1),transparent 65%);top:-80px;right:-80px;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr}}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.pill{font-size:11.5px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid}
+.pill.g{color:var(--green);border-color:var(--green2);background:rgba(74,222,128,.08)}
+.pill.y{color:var(--yellow);border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.07)}
+.pill.b{color:var(--blue);border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.07)}
+.pill.r{color:var(--red);border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.07)}
+.meta-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:230px}
+.meta-card .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px}
+.meta-card .row:last-child{border-bottom:none}
+.meta-card .row .lbl{color:var(--mut)}
+.meta-card .row .val{font-weight:700}
+.val.g{color:var(--green)}
+.val.y{color:var(--yellow)}
+.val.b{color:var(--blue)}
+
+/* ── STATEMENT ── */
+.statement-box{background:linear-gradient(135deg,rgba(74,222,128,.06),rgba(167,139,250,.06));border:1px solid rgba(74,222,128,.2);border-radius:16px;padding:32px;margin-top:32px}
+.statement-box p{font-size:15px;line-height:1.8;color:var(--tx)}
+.statement-box p+p{margin-top:14px}
+.statement-item{display:flex;gap:12px;margin-top:16px;padding:14px 16px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid var(--line)}
+.statement-item .si-nr{font-size:22px;font-weight:700;color:rgba(74,222,128,.25);font-family:var(--serif);line-height:1;flex-shrink:0;width:28px}
+.statement-item .si-text{font-size:13.5px;color:var(--mut);line-height:1.6}
+.statement-item .si-text b{color:var(--tx)}
+
+/* ── FEEDBACK (Alex) ── */
+.feedback-box{background:var(--panel2);border:1px solid rgba(96,165,250,.25);border-radius:16px;overflow:hidden;margin-top:32px}
+.feedback-header{background:rgba(96,165,250,.08);border-bottom:1px solid rgba(96,165,250,.2);padding:16px 24px;display:flex;align-items:center;gap:14px}
+.feedback-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:#fff;flex-shrink:0}
+.feedback-header-text h4{font-size:15px;font-weight:700;margin-bottom:2px}
+.feedback-header-text p{font-size:12px;color:var(--mut)}
+.score-badges{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.score-badge{background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.3);color:var(--green);font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px}
+.feedback-body{padding:24px}
+.feedback-body p{font-size:14px;color:var(--mut);line-height:1.75;margin-bottom:12px}
+.feedback-body p:last-child{margin-bottom:0}
+.feedback-section{margin-top:18px;padding:14px 16px;background:rgba(255,255,255,.03);border-radius:10px;border-left:3px solid var(--blue)}
+.feedback-section h5{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px}
+.feedback-section p{font-size:13px;color:var(--mut);margin:0}
+.feedback-crit{border-left-color:var(--yellow)}
+.feedback-crit h5{color:var(--yellow)}
+.feedback-quote{margin-top:20px;padding:16px 20px;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.15);border-radius:10px;font-size:13px;color:var(--mut);font-style:italic;line-height:1.7}
+.feedback-quote b{color:var(--green);font-style:normal}
+
+/* ── NEOTASTE ECKDATEN ── */
+.nt-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px}
+@media(max-width:900px){.nt-stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.nt-stats{grid-template-columns:1fr 1fr}}
+.nt-stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+.nt-stat .n{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--green);line-height:1.1;margin-bottom:4px}
+.nt-stat .l{font-size:11px;color:var(--mut)}
+.nt-source{font-size:11px;color:var(--mut2);margin-top:10px;font-style:italic}
+
+/* ── APP KARTEN ── */
+.app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+@media(max-width:900px){.app-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.app-grid{grid-template-columns:1fr}}
+.app-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;transition:.2s;text-decoration:none;color:inherit}
+.app-card:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 12px 32px rgba(74,222,128,.1);text-decoration:none;color:inherit}
+.app-card .ac-icon{font-size:24px;margin-bottom:10px}
+.app-card h4{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--tx)}
+.app-card p{font-size:12.5px;color:var(--mut);line-height:1.5;flex:1}
+.app-card .ac-footer{margin-top:14px;display:flex;align-items:center;justify-content:space-between}
+.ac-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;display:inline-block}
+.ac-pruf{color:var(--green);background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25)}
+.ac-doku{color:var(--blue);background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25)}
+.ac-proto{color:var(--purple);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25)}
+.ac-work{color:var(--yellow);background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.22)}
+.ac-link{font-size:11px;color:var(--mut2);font-weight:700}
+.app-card:hover .ac-link{color:var(--green)}
+.control-tower{border-color:rgba(236,72,153,.3);background:linear-gradient(135deg,rgba(236,72,153,.06),rgba(167,139,250,.06))}
+.control-tower:hover{border-color:var(--magenta);box-shadow:0 12px 32px rgba(236,72,153,.12)}
+
+/* ── WAS & WARUM (Unternehmensanalyse Basis) ── */
+.warum-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+@media(max-width:700px){.warum-grid{grid-template-columns:1fr}}
+.warum-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+.warum-card h4{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--tx)}
+.warum-card p{font-size:13px;color:var(--mut);line-height:1.65}
+.source-chain{margin-top:12px;padding:10px 12px;background:rgba(96,165,250,.05);border:1px solid rgba(96,165,250,.15);border-radius:8px;font-size:11.5px;color:var(--mut2)}
+.source-chain b{color:var(--blue)}
+.annahme-note{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);color:var(--yellow);margin-left:6px}
+.belegt-note{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);color:var(--green);margin-left:6px}
+
+/* ── AUFGABEN ── */
+.aufgaben-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+@media(max-width:700px){.aufgaben-grid{grid-template-columns:1fr}}
+.aufg-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.aufg-card .aufg-nr{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.aufg-card h4{font-size:14px;font-weight:700;margin-bottom:8px}
+.aufg-card p{font-size:12.5px;color:var(--mut);line-height:1.55}
+.aufg-card .aufg-wo{margin-top:10px;font-size:11.5px;color:var(--blue);font-style:italic}
+.aufg-card .aufg-status{margin-top:10px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-g{background:var(--green)}
+.dot-y{background:var(--yellow)}
+.dot-r{background:var(--red)}
+
+/* ── APP-STATUS TABELLE ── */
+.tbl-wrap{overflow-x:auto;margin-top:24px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--panel2);color:var(--mut);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:11px 14px;text-align:left;border-bottom:2px solid var(--line);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+tr:hover td{background:rgba(255,255,255,.02)}
+.trow-pruf td:first-child{border-left:3px solid var(--green)}
+.trow-doku td:first-child{border-left:3px solid var(--blue)}
+.trow-proto td:first-child{border-left:3px solid var(--purple)}
+.trow-err td:first-child{border-left:3px solid var(--red)}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-right:3px;margin-bottom:3px}
+.tag.g{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.25)}
+.tag.r{background:rgba(248,113,113,.12);color:var(--red);border:1px solid rgba(248,113,113,.25)}
+.tag.y{background:rgba(251,191,36,.1);color:var(--yellow);border:1px solid rgba(251,191,36,.22)}
+.tag.b{background:rgba(96,165,250,.1);color:var(--blue);border:1px solid rgba(96,165,250,.22)}
+.tag.p{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.22)}
+
+/* ── ABGABE-VERSIONEN ── */
+.abgabe-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+@media(max-width:700px){.abgabe-grid{grid-template-columns:1fr}}
+.abgabe-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.abgabe-card h4{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.abgabe-file{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin-bottom:7px;font-size:12.5px}
+.abgabe-file span{color:var(--mut)}
+
+/* ── ERKENNTNISSE DROPDOWNS ── */
+.erkenntnisse-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}
+@media(max-width:900px){.erkenntnisse-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.erkenntnisse-row{grid-template-columns:1fr 1fr}}
+details.erk-drop{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.2s}
+details.erk-drop[open]{border-color:var(--purple);background:var(--panel2)}
+details.erk-drop summary{padding:14px 16px;cursor:pointer;font-size:12.5px;font-weight:700;list-style:none;display:flex;flex-direction:column;gap:4px;user-select:none}
+details.erk-drop summary::-webkit-details-marker{display:none}
+details.erk-drop summary .erk-nr{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--purple);font-weight:700}
+details.erk-drop summary .erk-title{color:var(--tx);line-height:1.3}
+details.erk-drop summary .erk-tag-row{margin-top:4px}
+details.erk-drop .erk-body{padding:14px 16px;border-top:1px solid var(--line);font-size:12px;line-height:1.6}
+details.erk-drop .erk-body .erk-section{margin-bottom:10px}
+details.erk-drop .erk-body .erk-section:last-child{margin-bottom:0}
+details.erk-drop .erk-body .erk-section-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+details.erk-drop .erk-body .erk-section-label.gut{color:var(--green)}
+details.erk-drop .erk-body .erk-section-label.opt{color:var(--yellow)}
+details.erk-drop .erk-body .erk-section-label.nie{color:var(--red)}
+details.erk-drop .erk-body .erk-section-label.was{color:var(--blue)}
+details.erk-drop .erk-body p{color:var(--mut)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--line);padding:48px 0 32px;margin-top:0}
+.foot-wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
+.foot-col h5{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut2);font-weight:700;margin-bottom:14px}
+.foot-col p{font-size:13px;color:var(--mut);line-height:1.6}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:6px}
+.foot-links a{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:6px}
+.foot-links a:hover{color:var(--green);text-decoration:none}
+.foot-links .fl-icon{font-size:14px;width:20px;flex-shrink:0}
+.foot-divider{border:none;border-top:1px solid var(--line);margin-bottom:20px}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.foot-bottom p{font-size:11.5px;color:var(--mut2)}
+.foot-logo{font-family:var(--serif);font-weight:700;font-size:18px;color:var(--green);margin-bottom:10px;display:block}
+.schluss-box{background:linear-gradient(135deg,rgba(74,222,128,.06),rgba(167,139,250,.05));border:1px solid rgba(74,222,128,.15);border-radius:14px;padding:28px;margin-bottom:32px}
+.schluss-box p{font-size:14px;color:var(--mut);line-height:1.8}
+.schluss-box p+p{margin-top:10px}
+.schluss-box .sig{margin-top:16px;font-size:13px;color:var(--mut2);font-style:italic}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">NeoTaste · KI 2026</span>
+    <a href="#statement">Statement</a>
+    <span class="nav-sep">·</span>
+    <a href="#neotaste">NeoTaste Eckdaten</a>
+    <span class="nav-sep">·</span>
+    <a href="#apps">Apps & Agenten</a>
+    <span class="nav-sep">·</span>
+    <a href="#warum">Was & Warum</a>
+    <span class="nav-sep">·</span>
+    <a href="#aufgaben">Aufgaben 1–6</a>
+    <span class="nav-sep">·</span>
+    <a href="#abgaben">Abgaben</a>
+    <span class="nav-sep">·</span>
+    <a href="#erkenntnisse">Erkenntnisse</a>
+    <span class="nav-sep">·</span>
+    <a href="#feedback">Feedback</a>
+    <a href="https://neotaste-ai-marketing-hub.base44.app" target="_blank" style="margin-left:auto;color:var(--green);font-weight:700">→ Hub ↗</a>
+  </div>
+</nav>
+
+<!-- HERO / STATEMENT -->
+<div class="hero" id="statement">
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="kick">MOD Education · Marketing Masterclass with AI Power · Juni 2026</div>
+        <h1>NeoTaste<br><span class="em">KI-Abschlussprüfung</span></h1>
+        <p class="lead">Aufklärung, Reflexion und vollständige Dokumentation meines Abschlussprojekts — ehrlich, aus meiner Sicht, mit allem was gut lief und was ich beim nächsten Mal anders machen würde.</p>
+        <div class="pills">
+          <span class="pill g">90 / 100 Punkte · Bestanden</span>
+          <span class="pill b">7 Apps & Agenten gebaut</span>
+          <span class="pill y">Juni 2026 · Versuch 2/3</span>
+        </div>
+      </div>
+      <div class="meta-card">
+        <div style="padding:10px 0 14px;border-bottom:1px solid var(--line)">
+          <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:6px">Diese Seite</div>
+          <div style="font-size:12.5px;font-weight:700;color:var(--tx);margin-bottom:6px">Statement · Prüfungsübersicht · Aufklärung</div>
+          <div style="font-size:11.5px;color:var(--mut);line-height:1.55">Alles war inhaltlich vorhanden — nur Übersichts- &amp; Zeitprobleme durch Projektneuaufbau und 15 min Vorstellungszeit (keine separate Projektstartseite wie im Originalentwurf). Enthält Erkenntnisse &amp; das Dozenten-Feedback, auf das sich dieses Statement bezieht.</div>
+        </div>
+        <div class="row"><span class="lbl">Prüfling</span><span class="val">Sven Preuß</span></div>
+        <div class="row"><span class="lbl">Case</span><span class="val">NeoTaste</span></div>
+        <div class="row"><span class="lbl">Kurs</span><span class="val"><a href="https://www.mod-education.de/" target="_blank" style="color:var(--blue);text-decoration:none">MOD Education</a> · Batch 4</span></div>
+        <div class="row"><span class="lbl">Score</span><span class="val g">90% · 0.9/1</span></div>
+        <div class="row"><span class="lbl">Fachlich</span><span class="val g">82 / 90 Pkt.</span></div>
+        <div class="row"><span class="lbl">Vortrag</span><span class="val g">8 / 10 Pkt.</span></div>
+        <div class="row"><span class="lbl">Prüfer</span><span class="val b">Alex P. + LoLa</span></div>
+        <div class="row"><span class="lbl">Abgabe</span><span class="val">23.06.2026</span></div>
+        <div style="margin-top:10px;padding:8px 10px;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.25);border-radius:8px;font-size:11px;color:var(--yellow);line-height:1.5">
+          <b>📁 Hauptdokument</b> · Diese Datei<br>
+          <span style="color:var(--mut)">Im gleichen Ordner benötigt:</span><br>
+          <span style="font-family:monospace;font-size:10.5px">NeoProof_Cockpit.html<br>NeoTaste_Demo_Landingpage.html</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="statement-box">
+      <p>Ich muss ehrlich sein: Ich ärgere mich schon ein bisschen darüber, wie die Präsentation und die Abgaben letztendlich rübergekommen sind — weil es schlicht nicht das widerspiegelt, was ich ursprünglich geplant hatte und was ich inhaltlich auch wirklich geleistet habe. Das lag aber nicht an fehlendem Engagement oder fehlender Vorbereitung, sondern an einer Reihe von Entscheidungen, die ich im Laufe des Projekts getroffen habe und die — rückblickend — zumindest teils zulasten der Prüfungsstruktur gegangen sind.</p>
+      <p>Was passiert ist, lässt sich eigentlich ganz klar auf drei Hauptpunkte runterbrechen:</p>
+
+      <div class="statement-item">
+        <div class="si-nr">1</div>
+        <div class="si-text"><b>Projektgröße und Scope Creep.</b> Der ursprüngliche Plan war überschaubar: eine App, ein HITL-Workflow, dokumentierter KI-Einsatz im Marketing. Das ist dann aber — weil ich noch Zeit hatte und weil mir das Thema einfach Spaß macht — zu einem deutlich größeren Projekt geworden. Ich wollte das Projekt gleichzeitig als Portfolio-Case nutzen, was dazu geführt hat, dass ich mich nicht zurückhalten konnte. Konkret entstanden sind: ein <b>Homepage-Klon nach SEO/GEO/AEO/AIO-Prinzipien</b> mit vollständiger UI/UX-Überarbeitung (weil jedes seriöse Marketing-Konzept auf einem soliden SEO-Fundament steht), fünf <b>Base44-Apps</b> zur KI-gestützten Prüfungsdokumentation, Workflow-Steuerung und Growth Intelligence, die <b>NeoTaste FoodFriends App</b> als konzeptionelle Ergänzung zur bereits bestehenden NeoTaste-App (Daily Companion für die Zielgruppe), eine <b>Content-Erstellungs-App</b> zur gezielten Nachverfolgung der SMART-Ziele — und die Implementierung des internen Firmensystems aus einem früheren Case inklusive der Zusatzaufgabe und dem daraus entstandenen <b>Launch Control Tower</b> — dem Herzstück der internen Kommunikation.</div>
+      </div>
+      <div class="statement-item">
+        <div class="si-nr">2</div>
+        <div class="si-text"><b>Kein klassisches Präsentationsformat.</b> Ich hatte die Präsentation direkt in die App gebaut — als Navigation durch verschiedene Bereiche statt als klassisches Foliendeck. Das hatte technische Gründe (Platform-Limits während der Live-Demo) und strategische (ich wollte zeigen, dass ich KI-Systeme nicht nur konzipiere, sondern auch baue). Aus Prüfungssicht war das aber ein Problem — der rote Faden war für Alex und LoLa schwerer zu erkennen als er für mich selbst war.</div>
+      </div>
+      <div class="statement-item">
+        <div class="si-nr">3</div>
+        <div class="si-text"><b>Wettbewerbsanalyse und Aufgabe 1 nicht auffindbar.</b> Das ist der Punkt, der mich am meisten ärgert. Die Inhalte waren vorhanden — aber nicht an der Stelle, wo ein Prüfer sie in einem 15-Minuten-Slot erwarten würde. Das ist mein Fehler. Nicht die fehlende Arbeit, sondern die fehlende sichtbare Struktur.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MOD EDUCATION BATCHES -->
+<section>
+  <div class="wrap">
+    <div class="kick">MOD Education · Marketing Masterclass with AI Power</div>
+    <h2>Der Kurs — <span class="em"><a href="https://www.mod-education.de/" target="_blank" style="color:var(--green);text-decoration:none">mod-education.de</a></span></h2>
+    <p class="lead">Marketing Masterclass with AI Power — vier Batches, vier Abschlussprojekte &amp; 17 Zertifikate, vollständig abgeschlossen. <span style="font-size:13px;color:var(--mut2);font-style:italic">(Hintergrundinfo · nicht prüfungsrelevant für Batch 4)</span></p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px">
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;border-top:3px solid var(--blue)">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Batch 1</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px">Social Media Management</div>
+        <div style="font-size:12px;color:var(--mut)">Content Creation · Community · Kanalstrategie · Redaktionsplan</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:700;color:var(--green)">✓ Abgeschlossen</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;border-top:3px solid var(--purple)">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:8px">Batch 2</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px">Performance Marketing</div>
+        <div style="font-size:12px;color:var(--mut)">Google Ads · Meta Business Manager · Ad-Kampagnen · Targeting</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:700;color:var(--green)">✓ Abgeschlossen</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;border-top:3px solid var(--teal)">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Batch 3</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px">SEO · GEO · AIO · AEO</div>
+        <div style="font-size:12px;color:var(--mut)">SEO · GEO · AIO · AEO · SEA · ASO · Keywords · Optimierung</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:700;color:var(--green)">✓ Abgeschlossen</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid rgba(74,222,128,.3);border-radius:12px;padding:18px;border-top:3px solid var(--green)">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px">Batch 4 · Abschlussprojekt</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px">KI für Marketing</div>
+        <div style="font-size:12px;color:var(--mut)">KI für Content Creation · Performance Marketing · Workflows · NeoTaste Case</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:700;color:var(--green)">✓ 90/100 · Bestanden</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEOTASTE ECKDATEN -->
+<section id="neotaste">
+  <div class="wrap">
+    <div class="kick">Der Case · Alle verifizierten Fakten</div>
+    <h2>NeoTaste <span class="em">— Eckdaten</span></h2>
+    <p class="lead">Alle Zahlen sind durch offizielle Quellen belegt. Keine Schätzungen, keine erfundenen Werte. Alles mit Quellenangabe.</p>
+
+    <div class="nt-stats">
+      <div class="nt-stat"><div class="n">2 Mio.+</div><div class="l">Aktive Nutzer</div></div>
+      <div class="nt-stat"><div class="n">53</div><div class="l">Städte · 4 Länder</div></div>
+      <div class="nt-stat"><div class="n">7.000+</div><div class="l">Partnerrestaurants</div></div>
+      <div class="nt-stat"><div class="n">€21 Mio.</div><div class="l">Series A (2024)</div></div>
+      <div class="nt-stat"><div class="n">€6,99</div><div class="l">Pro Monat · Abo</div></div>
+      <div class="nt-stat"><div class="n">4,8 ★</div><div class="l">App Store iOS</div></div>
+      <div class="nt-stat"><div class="n">4,5 ★</div><div class="l">Google Play</div></div>
+      <div class="nt-stat"><div class="n">2019</div><div class="l">Gründung · Osnabrück</div></div>
+      <div class="nt-stat"><div class="n">DE/AT/<br>NL/UK</div><div class="l">Märkte</div></div>
+      <div class="nt-stat"><div class="n">2-für-1</div><div class="l">Deal-Modell · Kern-USP</div></div>
+    </div>
+    <p class="nt-source">Quellen (BELEGT): neotaste.com/de · App Store · Google Play · tech.eu · eu-startups.com · Crunchbase · Stand 06/2026</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px">
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px">
+        <h4 style="font-size:13px;font-weight:700;margin-bottom:10px;color:var(--green)">Offizielle NeoTaste Links</h4>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="https://neotaste.com/de" target="_blank" style="font-size:13px;display:flex;justify-content:space-between">neotaste.com/de<span style="color:var(--mut2)">↗ Website</span></a>
+          <a href="https://apps.apple.com/de/app/neotaste/id1484512399" target="_blank" style="font-size:13px;display:flex;justify-content:space-between">App Store (iOS)<span style="color:var(--mut2)">↗ Download</span></a>
+          <a href="https://play.google.com/store/apps/details?id=app.foodisto.foodisto&hl=de" target="_blank" style="font-size:13px;display:flex;justify-content:space-between">Google Play (Android)<span style="color:var(--mut2)">↗ Download</span></a>
+          <a href="https://www.instagram.com/neotaste.app/" target="_blank" style="font-size:13px;display:flex;justify-content:space-between">Instagram @neotaste.app<span style="color:var(--mut2)">↗ Social</span></a>
+          <a href="https://www.tiktok.com/@neotaste.app" target="_blank" style="font-size:13px;display:flex;justify-content:space-between">TikTok @neotaste.app<span style="color:var(--mut2)">↗ Social</span></a>
+          <a href="https://www.facebook.com/neotasteapp" target="_blank" style="font-size:13px;display:flex;justify-content:space-between">Facebook /neotasteapp<span style="color:var(--mut2)">↗ Social</span></a>
+          <a href="https://www.linkedin.com/company/neotaste/" target="_blank" style="font-size:13px;display:flex;justify-content:space-between">LinkedIn /company/neotaste<span style="color:var(--mut2)">↗ Business</span></a>
+        </div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px">
+        <h4 style="font-size:13px;font-weight:700;margin-bottom:14px;color:var(--blue)">Meine Projekt-Verlinkungen</h4>
+        <p style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--green);margin-bottom:8px">Meine NeoTaste Apps</p>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:16px">
+          <a href="https://preussdigital-netizen.github.io/neotaste-launch-tower/" target="_blank" style="font-size:12.5px;display:flex;justify-content:space-between">Launch Control Tower<span style="color:var(--mut2)">↗ Kommunikation &amp; Planung</span></a>
+          <a href="NeoTaste_Demo_Landingpage.html" style="font-size:12.5px;display:flex;justify-content:space-between">Demo-Landingpage<span style="color:var(--mut2)">→ SEO / GEO / AEO</span></a>
+          <a href="https://neotaste-ai-foodfriend.base44.app" target="_blank" style="font-size:12.5px;display:flex;justify-content:space-between">FoodFriends ★ Highlight<span style="color:var(--mut2)">↗ Daily Companion</span></a>
+          <a href="https://growth-marketing-content-cockpit.base44.app" target="_blank" style="font-size:12.5px;display:flex;justify-content:space-between">Content Cockpit · Smarte Ziele<span style="color:var(--mut2)">↗ Base44</span></a>
+        </div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Meine Prüfungs-Apps</p>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <a href="NeoProof_Cockpit.html" style="font-size:12.5px;display:flex;justify-content:space-between">NeoProof Cockpit (lokal)<span style="color:var(--mut2)">→ HTML</span></a>
+          <a href="https://neotaste-ai-marketing-hub.base44.app" target="_blank" style="font-size:12.5px;display:flex;justify-content:space-between">AI-Marketing Hub<span style="color:var(--mut2)">↗ Base44</span></a>
+          <a href="https://growth-intelligence-cockpit-neotaste.base44.app" target="_blank" style="font-size:12.5px;display:flex;justify-content:space-between">Growth Intelligence Cockpit<span style="color:var(--mut2)">↗ Base44</span></a>
+          <a href="https://zenith-focus-burrowing-flow.base44.app" target="_blank" style="font-size:12.5px;display:flex;justify-content:space-between">Zenith Workflow Cockpit<span style="color:var(--mut2)">↗ Base44</span></a>
+          <a href="https://ai-prompt-brain.base44.app" target="_blank" style="font-size:12.5px;display:flex;justify-content:space-between">AI Brain Bibliothek<span style="color:var(--mut2)">↗ Base44</span></a>
+          <a href="https://command-center-neotaste-projekt.base44.app" target="_blank" style="font-size:12.5px;display:flex;justify-content:space-between">ITF Prüfungs-Command-Center<span style="color:var(--mut2)">↗ Base44</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPS & AGENTEN -->
+<section id="apps">
+  <div class="wrap">
+    <div class="kick">Alle erstellten Apps · Zweck · Persona-Bezug</div>
+    <h2>Apps & Agenten <span class="em">— was ich gebaut habe</span></h2>
+    <p class="lead">Sieben Apps und Agenten ohne klassisches Coding gebaut (Natural Language Prompting / Vibe Coding): fünf Base44-Apps, der Launch Control Tower (GitHub) und das NeoProof Cockpit (lokal). Ebenfalls gebaut: AI Marketing Hub und AI Brain Bibliothek.</p>
+
+    <div class="app-grid">
+      <a class="app-card" href="NeoProof_Cockpit.html">
+        <div class="ac-icon">🔍</div>
+        <h4>NeoProof · KI-Prüfungs-Cockpit</h4>
+        <p>Das Herzstück der Prüfungsdokumentation. Alle Prompts, Quellen, Entscheidungen, KI-Ergebnisprüfungen und Human-in-the-Loop-Nachweise. Chronologisch, lückenlos, prüfbar. Erstellt mit Claude Cowork.</p>
+        <div class="ac-footer"><span class="ac-badge ac-pruf">Prüfungskern</span><span class="ac-link">Öffnen →</span></div>
+      </a>
+      <a class="app-card" href="https://command-center-neotaste-projekt.base44.app" target="_blank">
+        <div class="ac-icon">🎯</div>
+        <h4>ITF Prüfungs-Command-Center</h4>
+        <p>Zentrales Exam-Dashboard mit 7 Bereichen: Präsentation, Strategie, Dokumentation, NeoTaste, Portfolio, KI-Workflow. Überblick über alle 37 Prüfungsaufgaben, Phasen und KI-Workflows — erstellt zur MoD-Prüfungsvorbereitung.</p>
+        <div class="ac-footer"><span class="ac-badge ac-doku">Dokumentation</span><span class="ac-link">Öffnen ↗</span></div>
+      </a>
+      <a class="app-card" href="https://growth-marketing-content-cockpit.base44.app" target="_blank">
+        <div class="ac-icon">📊</div>
+        <h4>Growth Marketing Content Cockpit</h4>
+        <p>SMART-Ziele-Dashboard mit interaktivem 5-Schritt Ad-Content-Generator (Zielgruppe → Hook → Ad-Copy → KPIs → Protokoll). 90-Tage Kampagnen-Timeline von Setup bis Harvest — mit Persona Lena, Berlin. Direktlink zum NeoProof Agent.</p>
+        <div class="ac-footer"><span class="ac-badge ac-pruf">Prüfungskern · Aufg. 2+3</span><span class="ac-link">Öffnen ↗</span></div>
+      </a>
+      <a class="app-card" href="https://zenith-focus-burrowing-flow.base44.app" target="_blank">
+        <div class="ac-icon">⚡</div>
+        <h4>Zenith Workflow Cockpit</h4>
+        <p>14 Entities. Todo-System, Abgabe-Checkliste, Versionskontrolle, Projektnotizen. Diente der Selbststeuerung während des gesamten Projektzeitraums.</p>
+        <div class="ac-footer"><span class="ac-badge ac-work">Arbeitswerkzeug</span><span class="ac-link">Öffnen ↗</span></div>
+      </a>
+      <a class="app-card" href="https://growth-intelligence-cockpit-neotaste.base44.app" target="_blank">
+        <div class="ac-icon">📈</div>
+        <h4>Growth Intelligence Cockpit</h4>
+        <p>Prototyp eines KI-gestützten Marketing-Systems: Voice of Customer, Funnel-Builder, Campaign Builder, Partner Intelligence, Governance. Zeigt wie das für NeoTaste aussehen könnte.</p>
+        <div class="ac-footer"><span class="ac-badge ac-proto">Prototyp</span><span class="ac-link">Öffnen ↗</span></div>
+      </a>
+      <a class="app-card" href="https://neotaste-ai-foodfriend.base44.app" target="_blank">
+        <div class="ac-icon">🍽</div>
+        <h4>NeoTaste FoodFriends</h4>
+        <p>Rezept-App als App-Download-Treiber. Persona Lena entdeckt Rezepte → wird auf passende NeoTaste-Deals aufmerksam. Zeigt die Customer Journey von Awareness bis Conversion.</p>
+        <div class="ac-footer"><span class="ac-badge ac-proto">Demo · Persona-Bezug</span><span class="ac-link">Öffnen ↗</span></div>
+      </a>
+      <a class="app-card control-tower" href="https://preussdigital-netizen.github.io/neotaste-launch-tower/" target="_blank">
+        <div class="ac-icon">🗼</div>
+        <h4>Launch Control Tower</h4>
+        <p>Das Herzstück der internen Projektkommunikation. KI-gestützte Projektplanung für ein neues NeoTaste-Feature — vom ersten Plan bis zur launchfertigen Struktur. Ursprünglich aus dem früheren Case entstanden.</p>
+        <div class="ac-footer"><span class="ac-badge" style="color:var(--magenta);background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.25)">Case-Herzstück</span><span class="ac-link">Öffnen ↗</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WAS & WARUM -->
+<section id="warum">
+  <div class="wrap">
+    <div class="kick">Unternehmensanalyse · Personas · Strategie · Begründungen</div>
+    <h2>Was ich gemacht habe — <span class="em">und warum</span></h2>
+    <p class="lead">Hier lege ich offen, wie ich zu meinen Entscheidungen gekommen bin. Woher kommen die Personas? Warum diese Kanäle? Auf welcher Basis entstehen Annahmen — und wie belastbar sind die Quellen dahinter?</p>
+
+    <div class="warum-grid">
+      <div class="warum-card">
+        <h4>Warum NeoTaste als Case? <span class="belegt-note">BELEGT</span></h4>
+        <p>NeoTaste war der einzige der drei angebotenen Cases, der mir ein vollständig zugängliches digitales Ökosystem bot — Website, App Store, Social Media, öffentliche Pressemitteilungen, verifizierbare Nutzerzahlen. Das ermöglichte echte Quellenarbeit statt Raterei.</p>
+        <div class="source-chain"><b>Quellenweg:</b> neotaste.com/de (Primärquelle) → App Store Reviews (Nutzerbasis) → tech.eu / eu-startups.com (Series A) → eigene Erhebung Deal-Zahlen je Stadt</div>
+      </div>
+      <div class="warum-card">
+        <h4>Woher kommt Persona Lena? <span class="annahme-note">ANNAHME</span></h4>
+        <p>Lena ist KI-gestützt mit ChatGPT-4o entwickelt, aber nicht erfunden. Die Basis waren App Store Reviews, die NeoTaste-Instagram-Followerdemografie (öffentlich einsehbar), Food-Blog-Studien und allgemeine Marktforschung zu Urban Foodies in Deutschland. Kein Datensatz von NeoTaste selbst verfügbar.</p>
+        <div class="source-chain"><b>Quellenweg:</b> App Store Reviews (4,8★ iOS, 4,5★ Android, Juni 2026) → Instagram @neotaste.app Follower-Struktur → Statista Foodie-Demografie DE 2024 → ChatGPT Prompt v2 (nach Ablehnung von v1 als zu generisch) → manuelle Korrektur durch Sven Preuß</div>
+      </div>
+      <div class="warum-card">
+        <h4>Warum Instagram & TikTok? <span class="belegt-note">BELEGT</span></h4>
+        <p>NeoTaste ist bereits auf beiden Kanälen aktiv mit verifizierbaren Accounts. Die Zielgruppe 25–35 urban ist nachweislich auf beiden Plattformen dominant für Food-Content. TikTok-Food-Content hat laut TikTok Business 2024 überdurchschnittlich hohe Engagement-Raten im DACH-Raum.</p>
+        <div class="source-chain"><b>Quellenweg:</b> instagram.com/neotaste.app (offiziell aktiv) → tiktok.com/@neotaste.app (offiziell aktiv) → TikTok for Business DACH Report 2024 → Meta Business Insights Food & Beverage 2024</div>
+      </div>
+      <div class="warum-card">
+        <h4>Warum die SMART-Ziele so? <span class="annahme-note">ANNAHME</span></h4>
+        <p>Die Zahlenwerte (15% Install-Steigerung, CPI ≤ €2,50, Conversion 8%→12%) sind Annahmen auf Basis externer Benchmarks — keine internen NeoTaste-Daten. Ich habe bewusst konservative Werte gewählt und sie als Annahmen markiert, weil ich keine internen Kennzahlen hatte.</p>
+        <div class="source-chain"><b>Quellenweg:</b> Mapendo App Marketing Benchmark Report 2025 (CPI-Referenz) → RevenueCat State of Subscription Apps 2025 (Conversion-Referenz) → AppsFlyer Mobile App Trends 2024 → eigene Einschätzung auf Basis Branchenwissen</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px 20px;background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.18);border-radius:12px;font-size:13px;color:var(--mut);line-height:1.7">
+      <b style="color:var(--yellow)">Wichtiger Hinweis zu Annahmen:</b> Auch Annahmen brauchen Begründungen — das ist der Unterschied zwischen einer strukturierten Analyse und einer Vermutung. Jede Annahme in diesem Projekt hat eine nachvollziehbare Quellenkette: über Foren, Blogs, Branchenberichte, App-Store-Rezensionen und Vergleichsdaten bin ich zu meinen Schlussfolgerungen gekommen. Die Glaubwürdigkeit jeder Quelle wurde bewertet nach: Aktualität, Ersteller, Trust-Signale, Branchen-Kontext — und anschließend einer strengen selbstkritischen Kontrolle unterzogen, bevor sie als Basis für eine Entscheidung genutzt wurde. Erst dann: HITL-Freigabe.
+    </div>
+  </div>
+</section>
+
+<!-- AUFGABEN 1–6 -->
+<section id="aufgaben">
+  <div class="wrap">
+    <div class="kick">Prüfungsanforderungen · Alle 6 Aufgaben</div>
+    <h2>Aufgaben 1–6 <span class="em">— wo was zu finden ist</span></h2>
+    <p class="lead">Für jeden der Prüfer und für mich selbst: Hier ist dokumentiert, was zu jeder Aufgabe erarbeitet wurde — und wo genau es in der zweiten Abgabe zu finden gewesen wäre.</p>
+
+    <div class="aufgaben-grid">
+      <div class="aufg-card">
+        <div class="aufg-nr" style="color:var(--red)">Aufgabe 1 · Unternehmensanalyse</div>
+        <h4>Geschäftsmodell, Zielgruppe, Kanäle, Wettbewerber</h4>
+        <p>Vollständig erarbeitet: Geschäftsmodell (B2C + B2B, Freemium + Abo), Zielgruppe (Urban Foodies 25–35), alle Marketingkanäle (Instagram, TikTok, Facebook), Wettbewerbsanalyse (TheFork, Too Good To Go, Groupon), SWOT. Das Problem: In der Präsentation nicht an der erwarteten Stelle sichtbar — war verteilt über mehrere App-Bereiche.</p>
+        <div class="aufg-wo">In Abgabe 2 zu finden: NeoTaste AI-Marketing Hub → Sektion „Unternehmensanalyse" · NeoTaste Superagent → Tab „NeoTaste Analyse & Fakten" · Strategischer Analysebericht PDF</div>
+        <div class="aufg-status"><div class="dot dot-y"></div><span style="color:var(--yellow)">Erarbeitet — aber nicht auffindbar präsentiert (Prüfer-Feedback bestätigt)</span></div>
+      </div>
+      <div class="aufg-card">
+        <div class="aufg-nr" style="color:var(--purple)">Aufgabe 2 · Zielgruppenanalyse & SMART-Ziele</div>
+        <h4>Persona Lena + 2 SMART-Ziele + Bias-Risiko</h4>
+        <p>Persona Lena (27, Urban Foodie) KI-gestützt mit ChatGPT entwickelt, klar als ANNAHME markiert, Bias-Risiko dokumentiert. 2 SMART-Ziele mit KPI-Referenz (Mapendo 2025, RevenueCat 2025). Prompt-Iteration v1→v2 dokumentiert.</p>
+        <div class="aufg-wo">In Abgabe 2 zu finden: NeoProof Cockpit → Protokoll Aufgabe 2 · Superagent → Quellenprotokoll + Persona-Eintrag · Abschlusspräsentation Folie 3</div>
+        <div class="aufg-status"><div class="dot dot-g"></div><span style="color:var(--green)">Vollständig — inkl. Bias-Risiko und Quellenkettte</span></div>
+      </div>
+      <div class="aufg-card">
+        <div class="aufg-nr" style="color:var(--blue)">Aufgabe 3 · Kampagnenstrategie mit KI</div>
+        <h4>4-Stufen-Funnel · Kanäle · KPIs · HITL-Punkte</h4>
+        <p>Kampagne „Dein erstes Dinner. Dein erster Deal." — 4 Funnel-Stufen (Awareness → Consideration → Conversion → Retention), je Stufe Kanal und KI-Zuweisung, KPIs definiert. SMART-Ziele aus Aufgabe 2 wurden sauber aufgegriffen (laut Alex-Feedback bestätigt).</p>
+        <div class="aufg-wo">In Abgabe 2 zu finden: Abschlusspräsentation Folie 4 · NeoTaste AI-Marketing Hub → Kampagnenseite · Strategischer KI-Transformationsbericht PDF</div>
+        <div class="aufg-status"><div class="dot dot-g"></div><span style="color:var(--green)">Vollständig — SMART-Bezug laut Prüfer bestätigt</span></div>
+      </div>
+      <div class="aufg-card">
+        <div class="aufg-nr" style="color:var(--magenta)">Aufgabe 4 · Content-Strategie & KI-Content</div>
+        <h4>3 Content-Säulen · A/B-Beispiele · Kennzeichnung</h4>
+        <p>3 Content-Säulen (Entdeckung, Vertrauen, Abo-Nutzen), A/B-Varianten-Beispiel dokumentiert, Kennzeichnungspflicht nach EU AI Act berücksichtigt. Laut Alex-Feedback: SMART-Ziele aus Aufgabe 2 wurden in Aufgabe 4 nicht mehr konsequent zurückgeführt — das ist der dokumentierte Schwachpunkt.</p>
+        <div class="aufg-wo">In Abgabe 2 zu finden: Abschlusspräsentation Folie 5 · NeoProof Cockpit → Contentprotokoll · Superagent → Content-Tab</div>
+        <div class="aufg-status"><div class="dot dot-y"></div><span style="color:var(--yellow)">Vorhanden — aber SMART-Rückbezug fehlt (Prüfer-Feedback)</span></div>
+      </div>
+      <div class="aufg-card">
+        <div class="aufg-nr" style="color:var(--yellow)">Aufgabe 5 · KI-Toolstack & Workflow</div>
+        <h4>5-Schritt-Workflow · 5 Tools · DSGVO-Hinweise</h4>
+        <p>Vollständiger 5-Schritt-Workflow (Briefing → Prompt → KI-Output → Prüfung → Freigabe), 5 Tools mit jeweiligem DSGVO-Hinweis und Aufgabe im Workflow, Datenfluss dokumentiert, Human-in-the-Loop an Schritten 1, 4 und 5 explizit.</p>
+        <div class="aufg-wo">In Abgabe 2 zu finden: Abschlusspräsentation Folie 6 · NeoProof Cockpit → Toolstackprotokoll · Superagent → Agenten-Tab</div>
+        <div class="aufg-status"><div class="dot dot-g"></div><span style="color:var(--green)">Vollständig — stärkster Bereich laut Eigeneinschätzung</span></div>
+      </div>
+      <div class="aufg-card">
+        <div class="aufg-nr" style="color:var(--red)">Aufgabe 6 · Risiken & Verantwortung</div>
+        <h4>6 Risikoklassen · EU AI Act · DSGVO</h4>
+        <p>6 Risikoklassen (Halluzination, Urheberrecht, DSGVO, Kennzeichnung, Bias, Dark Patterns) mit Gegenmaßnahmen. Laut Alex-Feedback: zu allgemein, nicht ausreichend NeoTaste-spezifisch. Das ist der zweite klar benannte Schwachpunkt — Urheberrecht, Bias und Dark Patterns hätten konkreter auf NeoTaste übertragen werden müssen.</p>
+        <div class="aufg-wo">In Abgabe 2 zu finden: Abschlusspräsentation Folie 7 · NeoProof Cockpit → Risikoprotokoll · Superagent → Risiken-Tab</div>
+        <div class="aufg-status"><div class="dot dot-y"></div><span style="color:var(--yellow)">Vorhanden — zu generisch, NeoTaste-Bezug ausbaufähig (Prüfer-Feedback)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABGABE-VERSIONEN -->
+<section id="abgaben">
+  <div class="wrap">
+    <div class="kick">Eingereichte Dokumente · Übersicht</div>
+    <h2>Prüfungsabgaben <span class="em">— was wann eingereicht wurde</span></h2>
+
+    <div class="abgabe-grid">
+      <div class="abgabe-card">
+        <h4><span style="background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);color:var(--blue);font-size:11px;padding:3px 9px;border-radius:12px;font-weight:700;margin-right:8px">Abgabe 1</span>Erste Prüfungsabgabe</h4>
+        <p style="font-size:12.5px;color:var(--mut);margin-bottom:14px">Erste Abgabe — Arbeitsablauf, Hub-PDF und Notfall-Onepager. Eingereicht über MOD Education Lernplattform.</p>
+        <div class="abgabe-file">
+          <span>Arbeitsablaufsplan_KI_Abschlussprojekt_NeoTaste_Entwurf.pdf</span>
+          <span style="color:var(--green);font-size:11px;font-weight:700">Eingereicht</span>
+        </div>
+        <div class="abgabe-file">
+          <span>NeoTaste - AI Marketing Hub - KI-Abschlussprüfung.pdf</span>
+          <span style="color:var(--green);font-size:11px;font-weight:700">Eingereicht</span>
+        </div>
+        <div class="abgabe-file">
+          <span>NeoTaste · KI-Abschlusspräsentation · Notfall-Onepager.pdf</span>
+          <span style="color:var(--green);font-size:11px;font-weight:700">Eingereicht</span>
+        </div>
+        <p style="font-size:11px;color:var(--mut2);margin-top:10px">Score: 90% · 0.9/1 · Versuch 2/3 · Juni 2026</p>
+      </div>
+      <div class="abgabe-card">
+        <h4><span style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);color:var(--green);font-size:11px;padding:3px 9px;border-radius:12px;font-weight:700;margin-right:8px">Abgabe 2</span>Geplante / Finale Dokumentation</h4>
+        <p style="font-size:12.5px;color:var(--mut);margin-bottom:14px">Die vollständige Nachbereitung und Finalisierung — dieser Hub, die überarbeitete Präsentation und die komplette Protokolldokumentation.</p>
+        <div class="abgabe-file">
+          <span>NeoTaste_Abschlusspräsentation_SvenPreuss.pptx</span>
+          <span style="color:var(--yellow);font-size:11px;font-weight:700">In Bearbeitung</span>
+        </div>
+        <div class="abgabe-file">
+          <span>KI_Pruefung_Projektanalyse_Erkenntnisse.html (diese Seite)</span>
+          <span style="color:var(--green);font-size:11px;font-weight:700">Fertiggestellt 23.06.</span>
+        </div>
+        <div class="abgabe-file">
+          <span>NeoProof_Cockpit.html (vollständig befüllt)</span>
+          <span style="color:var(--yellow);font-size:11px;font-weight:700">Ausstehend</span>
+        </div>
+        <p style="font-size:11px;color:var(--mut2);margin-top:10px">Ziel: Alle offenen Punkte aus dem Prüfungsfeedback sichtbar adressiert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ERKENNTNISSE DROPDOWNS -->
+<section id="erkenntnisse">
+  <div class="wrap">
+    <div class="kick">Rückblick · Was ich mitgenommen habe</div>
+    <h2>8 Erkenntnisse <span class="em">— ehrlich reflektiert</span></h2>
+    <p class="lead">Nicht als Selbstkritik, sondern als ehrliche Dokumentation: was funktioniert hat, was ich beim nächsten Mal anders machen würde — und was niemals wieder passieren darf.</p>
+
+    <div class="erkenntnisse-row">
+      <details class="erk-drop">
+        <summary>
+          <span class="erk-nr">01</span>
+          <span class="erk-title">Platform-Limits live · Technikpanne während der Prüfung</span>
+          <span class="erk-tag-row"><span class="tag p">Tech</span></span>
+        </summary>
+        <div class="erk-body">
+          <div class="erk-section"><div class="erk-section-label was">Was passiert ist</div><p>Base44 hat während der Live-Prüfung Usage-Limits erreicht. Die App ist abgestürzt, musste mehrfach neu aufgebaut werden — live, unter Zeitdruck, vor Prüfer.</p></div>
+          <div class="erk-section"><div class="erk-section-label gut">Was gut war</div><p>Transparente Kommunikation. Trotzdem bestanden.</p></div>
+          <div class="erk-section"><div class="erk-section-label opt">Was ich optimiere</div><p>Vor jeder Live-Demo alle Tools offline als Screenshot/Video sichern. Fallback-Plan ist Pflicht.</p></div>
+          <div class="erk-section"><div class="erk-section-label nie">Niemals wieder</div><p>Eine Prüfungsdemo ausschließlich auf Live-Verbindung aufbauen ohne Backup.</p></div>
+        </div>
+      </details>
+
+      <details class="erk-drop">
+        <summary>
+          <span class="erk-nr">02</span>
+          <span class="erk-title">Prüfer wollte Live-Ergebnisse — kein Konzept</span>
+          <span class="erk-tag-row"><span class="tag y">Prüfung</span></span>
+        </summary>
+        <div class="erk-body">
+          <div class="erk-section"><div class="erk-section-label was">Was passiert ist</div><p>Alex war enttäuscht, keine funktionierenden Live-Ergebnisse zu sehen — obwohl sie vorhanden waren, nur nicht im richtigen Moment abrufbar.</p></div>
+          <div class="erk-section"><div class="erk-section-label gut">Was gut war</div><p>Inhaltliche Tiefe wurde anerkannt. 82/90 Fachpunkte sind ein gutes Ergebnis.</p></div>
+          <div class="erk-section"><div class="erk-section-label opt">Was ich optimiere</div><p>Demo früher abschließen und als statischen Screencast sichern. Kein Live-Only-Ansatz.</p></div>
+          <div class="erk-section"><div class="erk-section-label nie">Niemals wieder</div><p>Annehmen, dass am Prüfungstag alles technisch funktioniert.</p></div>
+        </div>
+      </details>
+
+      <details class="erk-drop">
+        <summary>
+          <span class="erk-nr">03</span>
+          <span class="erk-title">Wettbewerbsanalyse nicht auffindbar</span>
+          <span class="erk-tag-row"><span class="tag r">Kritisch</span></span>
+        </summary>
+        <div class="erk-body">
+          <div class="erk-section"><div class="erk-section-label was">Was passiert ist</div><p>Die Wettbewerbsanalyse war erarbeitet aber nicht an der Stelle wo Alex sie erwartet hat. Er hat sie nicht gefunden — ich konnte sie live nicht liefern.</p></div>
+          <div class="erk-section"><div class="erk-section-label gut">Was gut war</div><p>Die Analyse existiert in den PDFs und Superagent-Daten.</p></div>
+          <div class="erk-section"><div class="erk-section-label opt">Was ich optimiere</div><p>Jede Aufgabe bekommt eine eigene klare Sektion — unübersehbar, in der erwarteten Reihenfolge.</p></div>
+          <div class="erk-section"><div class="erk-section-label nie">Niemals wieder</div><p>Wichtige Prüfungsinhalte über mehrere App-Bereiche verteilen ohne direkten Einstieg.</p></div>
+        </div>
+      </details>
+
+      <details class="erk-drop">
+        <summary>
+          <span class="erk-nr">04</span>
+          <span class="erk-title">BELEGT vs. ANNAHME Trennung — das hat überzeugt</span>
+          <span class="erk-tag-row"><span class="tag g">Stärke</span></span>
+        </summary>
+        <div class="erk-body">
+          <div class="erk-section"><div class="erk-section-label was">Was passiert ist</div><p>Die konsequente Kennzeichnung aller Fakten als BELEGT (mit Quelle) oder ANNAHME (mit Begründung) wurde von Alex explizit positiv erwähnt.</p></div>
+          <div class="erk-section"><div class="erk-section-label gut">Was gut war</div><p>Keine einzige unbelegte Behauptung. Das hat Vertrauen geschaffen.</p></div>
+          <div class="erk-section"><div class="erk-section-label opt">Was ich optimiere</div><p>Diese Trennung auch visuell im Multipager sofort sichtbar machen.</p></div>
+          <div class="erk-section"><div class="erk-section-label nie">Niemals wieder</div><p>NeoTaste-Zahlen ohne Quellenangabe verwenden.</p></div>
+        </div>
+      </details>
+
+      <details class="erk-drop">
+        <summary>
+          <span class="erk-nr">05</span>
+          <span class="erk-title">Backup-App ohne Inhalte verlinkt</span>
+          <span class="erk-tag-row"><span class="tag r">Tech-Schulden</span></span>
+        </summary>
+        <div class="erk-body">
+          <div class="erk-section"><div class="erk-section-label was">Was passiert ist</div><p>Im Hub führen mehrere Links zu leeren oder falschen App-Versionen (Backup-Instanzen ohne Inhalte).</p></div>
+          <div class="erk-section"><div class="erk-section-label gut">Was gut war</div><p>Die richtigen Apps existieren und haben Inhalte — nur falsch verlinkt.</p></div>
+          <div class="erk-section"><div class="erk-section-label opt">Was ich optimiere</div><p>Jeden Link vor Abgabe manuell öffnen und prüfen.</p></div>
+          <div class="erk-section"><div class="erk-section-label nie">Niemals wieder</div><p>Eine Prüfungsabgabe mit nicht getesteten Links einreichen.</p></div>
+        </div>
+      </details>
+
+      <details class="erk-drop">
+        <summary>
+          <span class="erk-nr">06</span>
+          <span class="erk-title">Inhalt schlägt Technik — immer</span>
+          <span class="erk-tag-row"><span class="tag b">Strategie</span></span>
+        </summary>
+        <div class="erk-body">
+          <div class="erk-section"><div class="erk-section-label was">Was passiert ist</div><p>Die technische App-Infrastruktur war beeindruckend aber hat den Fokus von den inhaltlichen Schwachstellen (Aufg. 4, 6) abgelenkt.</p></div>
+          <div class="erk-section"><div class="erk-section-label gut">Was gut war</div><p>Alex hat den technischen Aufwand explizit und mehrfach anerkannt.</p></div>
+          <div class="erk-section"><div class="erk-section-label opt">Was ich optimiere</div><p>Zuerst Pflichtinhalt vollständig — dann Bonus-Technik.</p></div>
+          <div class="erk-section"><div class="erk-section-label nie">Niemals wieder</div><p>Technische Spielerei priorisieren wenn Prüfungsinhalt noch offen ist.</p></div>
+        </div>
+      </details>
+
+      <details class="erk-drop">
+        <summary>
+          <span class="erk-nr">07</span>
+          <span class="erk-title">Vibe Coding als Differenziator — hat funktioniert</span>
+          <span class="erk-tag-row"><span class="tag g">Stärke</span></span>
+        </summary>
+        <div class="erk-body">
+          <div class="erk-section"><div class="erk-section-label was">Was passiert ist</div><p>5 funktionierende Base44-Apps via Natural Language Prompting — das hat Alex sichtlich beeindruckt und war eindeutiger Differenziator.</p></div>
+          <div class="erk-section"><div class="erk-section-label gut">Was gut war</div><p>Zeigt KI-Kompetenz weit über Text-Prompting hinaus.</p></div>
+          <div class="erk-section"><div class="erk-section-label opt">Was ich optimiere</div><p>Weniger Apps, dafür mit Backup-Strategie und stabilerer Präsentation.</p></div>
+          <div class="erk-section"><div class="erk-section-label nie">Niemals wieder</div><p>Mehr Apps bauen als ich sicher präsentieren kann.</p></div>
+        </div>
+      </details>
+
+      <details class="erk-drop">
+        <summary>
+          <span class="erk-nr">08</span>
+          <span class="erk-title">Aufklärungs-Seite wäre der Game Changer gewesen</span>
+          <span class="erk-tag-row"><span class="tag p">Dokumentation</span></span>
+        </summary>
+        <div class="erk-body">
+          <div class="erk-section"><div class="erk-section-label was">Was passiert ist</div><p>Ohne Einleitungsseite musste Alex selbst verstehen was welche App tut. Das kostete wertvolle Präsentationsminuten.</p></div>
+          <div class="erk-section"><div class="erk-section-label gut">Was gut war</div><p>Der Hub war als Idee bereits angelegt — die Grundstruktur stimmte.</p></div>
+          <div class="erk-section"><div class="erk-section-label opt">Was ich optimiere</div><p>Die Aufklärungs-OnePage ist die erste Seite — immer. In 30 Sekunden muss alles klar sein.</p></div>
+          <div class="erk-section"><div class="erk-section-label nie">Niemals wieder</div><p>Eine Prüfung ohne erklärende Einstiegsseite abgeben.</p></div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK ALEX -->
+<section id="feedback">
+  <div class="wrap">
+    <div class="kick">Offizielles Prüfungsfeedback · Juni 2026</div>
+    <h2>Was Alex und LoLa <span class="em">gesagt haben</span></h2>
+    <p class="lead">Das Feedback ist real, unverändert aus dem Prüfungsdokument übernommen. LoLa hat als zweite Prüferin die Aufzeichnung der Präsentation gemeinsam mit Alex ausgewertet und die Bewertung gemeinsam abgestimmt.</p>
+
+    <div class="feedback-box">
+      <div class="feedback-header">
+        <div class="feedback-avatar">A</div>
+        <div class="feedback-header-text">
+          <h4>Alexander Posselt</h4>
+          <p>Dozent KI / Topic Owner AI · Masters of Digital · MOD Education</p>
+        </div>
+        <div class="score-badges">
+          <span class="score-badge">90 / 100 Pkt.</span>
+          <span class="score-badge" style="background:rgba(96,165,250,.1);border-color:rgba(96,165,250,.3);color:var(--blue)">Bestanden</span>
+        </div>
+      </div>
+      <div class="feedback-body">
+        <p>„Zunächst mal meinen persönlichen Respekt für deine enorme Eigenleistung! Der Aufbau einer eigenen App inklusive Wissensdatenbanken, Dokumentationssystemen, Agentenlogik, Workflows sowie der Anbindung verschiedener KI-Tools und Systeme geht deutlich über das hinaus, was ich hier üblicherweise sehe. Du hast da sehr viel Zeit, Engagement und technisches Verständnis investiert."</p>
+
+        <div class="feedback-section">
+          <h5>Fachliche Inhalte & KI-Nutzung — 82 / 90 Punkten</h5>
+          <p>Positiv: konsequente Dokumentation des KI-Einsatzes, Nutzung mehrerer KI-Systeme zur Gegenprüfung, Kennzeichnung von Annahmen, Human-in-the-Loop-Ansatz. „Du hast dich intensiv mit den Möglichkeiten und Grenzen von KI auseinandergesetzt."</p>
+        </div>
+        <div class="feedback-section feedback-crit">
+          <h5>Punktabzüge im Fachlichen</h5>
+          <p>Die Wettbewerbsanalyse wurde weder von Alex noch von mir in der Prüfung gefunden. Die SMART-Ziele aus Aufgabe 2 werden in der Kampagnenstrategie (Aufg. 3) aufgegriffen, in der Content-Strategie (Aufg. 4) aber nicht mehr konsequent zurückgeführt. Aufgabe 6 bleibt zu allgemein — Themen wie Urheberrecht, Bias oder Dark Patterns werden zwar genannt, aber nicht ausreichend auf den konkreten NeoTaste-Case übertragen.</p>
+        </div>
+        <div class="feedback-section">
+          <h5>Vortragsqualität & Struktur — 8 / 10 Punkten</h5>
+          <p>Da keine klassische Präsentation vorlag, erfolgte die Vorstellung direkt über die App. „Dadurch waren viele Inhalte zwar sichtbar, allerdings entwickelte sich die Präsentation stellenweise zu einer längeren Navigation durch verschiedene Bereiche, Dokumente und Ansichten. Das führte zeitweise zu einem etwas chaotischen Vortragsfluss."</p>
+        </div>
+        <div class="feedback-quote">
+          <b>Abschließendes Zitat Alex:</b> „Insgesamt ist dir jedoch eine sehr gute Leistung gelungen, die deutlich zeigt, wie intensiv du dich mit KI, Automatisierung, strukturierten Arbeitsprozessen und modernen Tools beschäftigt hast. Besonders der Aufbau der App und der gesamten Projektinfrastruktur verdient nochmals großen Respekt. Herzlichen Glückwunsch zur bestandenen Prüfung und vielen Dank für den hohen Einsatz. Und das ist alles nicht KI generiert!"
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-wrap">
+    <div class="schluss-box">
+      <div class="kick">Schlusswort</div>
+      <p>Dieses Projekt war deutlich mehr als eine Prüfungsaufgabe. Es war mein erster wirklich tiefer Einstieg in den methodischen, kritischen und verantwortungsvollen Einsatz von KI im Marketing — und zwar nicht nur theoretisch, sondern mit echten Systemen, echten Entscheidungen und echtem Druck unter Zeitlimit.</p>
+      <p>Ich bin Alex und LoLa dankbar für die Möglichkeit, dieses Projekt so vorstellen zu dürfen — und für das ehrliche, respektvolle Feedback. Das ist nicht selbstverständlich. Die Kritikpunkte nehme ich mit und setze sie um. Das Lob nehme ich auch an — weil ich weiß, wie viel Arbeit drin steckt.</p>
+      <p>90/100 Punkten sind ein gutes Ergebnis. Das nächste wird besser strukturiert sein. Versprochen.</p>
+      <div class="sig">— Sven Preuß · Tettnang / Bodenseeraum · Juni 2026</div>
+    </div>
+
+    <div class="foot-grid">
+      <div class="foot-col">
+        <span class="foot-logo">NeoTaste · KI 2026</span>
+        <p>KI-gestütztes Marketingkonzept für den Case NeoTaste — Abschlussprojekt der <a href="https://www.mod-education.de/" target="_blank" style="color:var(--blue)">MOD Education</a> von Sven Preuß.<br><span style="font-size:11px;color:var(--mut2)">Batch 1 · Social Media &amp; Content · Batch 2 · Google &amp; Meta Ads · Batch 3 · SEO/GEO/AIO/AEO · Batch 4 · KI für Content &amp; Workflows · Abgeschlossen</span></p>
+        <p style="margin-top:10px;font-size:12px;color:var(--mut2)">NeoTaste = Marke der NeoTaste GmbH. Dieses Projekt ist eine studentische Fallstudie. Kein offizielles Angebot, keine Kooperation mit NeoTaste.</p>
+      </div>
+      <div class="foot-col">
+        <h5>NeoTaste Offizielle Links</h5>
+        <ul class="foot-links">
+          <li><a href="https://neotaste.com/de" target="_blank"><span class="fl-icon">🌐</span>neotaste.com/de</a></li>
+          <li><a href="https://apps.apple.com/de/app/neotaste/id1484512399" target="_blank"><span class="fl-icon">🍎</span>App Store (iOS)</a></li>
+          <li><a href="https://play.google.com/store/apps/details?id=app.foodisto.foodisto&hl=de" target="_blank"><span class="fl-icon">▶</span>Google Play</a></li>
+          <li><a href="https://www.instagram.com/neotaste.app/" target="_blank"><span class="fl-icon">📸</span>Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@neotaste.app" target="_blank"><span class="fl-icon">🎵</span>TikTok</a></li>
+          <li><a href="https://www.facebook.com/neotasteapp" target="_blank"><span class="fl-icon">📘</span>Facebook</a></li>
+          <li><a href="https://www.linkedin.com/company/neotaste/" target="_blank"><span class="fl-icon">💼</span>LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Meine Verlinkungen</h5>
+        <ul class="foot-links">
+          <li><a href="KI_Pruefung_Projektanalyse_Erkenntnisse_2.html"><span class="fl-icon">📄</span>Hauptseite · Projektanalyse</a></li>
+          <li><a href="NeoTaste_Demo_Landingpage.html"><span class="fl-icon">🌐</span>Demo-Landingpage (SEO/GEO/AEO)</a></li>
+          <li><a href="https://neotaste-ai-foodfriend.base44.app" target="_blank"><span class="fl-icon">🍽</span>FoodFriends App</a></li>
+          <li><a href="https://preussdigital-netizen.github.io/neotaste-launch-tower/" target="_blank"><span class="fl-icon">🗼</span>Launch Control Tower</a></li>
+          <li><a href="https://marketingmitsven.de" target="_blank"><span class="fl-icon">🎯</span>marketingmitsven.de</a></li>
+        </ul>
+        <p style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mut2);margin:14px 0 8px">Apps zur Prüfungserstellung – Nachweissammlung</p>
+        <ul class="foot-links">
+          <li><a href="NeoProof_Cockpit.html"><span class="fl-icon">🔍</span>NeoProof Cockpit</a></li>
+          <li><a href="https://command-center-neotaste-projekt.base44.app" target="_blank"><span class="fl-icon">🎯</span>ITF Prüfungs-Command-Center</a></li>
+          <li><a href="https://growth-intelligence-cockpit-neotaste.base44.app" target="_blank"><span class="fl-icon">📈</span>Growth Intelligence</a></li>
+          <li><a href="NeoTaste_Hub_Willkommensseite.html"><span class="fl-icon">🏠</span>Hub Willkommensseite</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Kontakt</h5>
+        <ul class="foot-links">
+          <li><a href="mailto:preuss.digital@gmail.com"><span class="fl-icon">✉</span>preuss.digital@gmail.com</a></li>
+          <li><a href="mailto:sven.preuss95@gmail.com"><span class="fl-icon">✉</span>sven.preuss95@gmail.com</a></li>
+        </ul>
+        <p style="margin-top:14px;font-size:12px;color:var(--mut2)">Tettnang / Bodenseeraum (DACH)<br>MOD Education · Marketing Masterclass with AI Power · Juni 2026</p>
+      </div>
+    </div>
+    <hr class="foot-divider">
+    <div class="foot-bottom">
+      <p>© 2026 Sven Preuß · KI-Abschlussprojekt NeoTaste · MOD Education · Stand 22.06.2026</p>
+      <p>Erstellt mit Claude Sonnet 4.6 · Claude Cowork · NeoProof KI-Prüfungs-Cockpit</p>
+    </div>
+  </div>
+</footer>
+
+
+
+<script>
+(function(){
+  'use strict';
+  var sectionIds=['statement','neotaste','apps','warum','aufgaben','abgaben','erkenntnisse','feedback'];
+  var sections=sectionIds.map(function(id){return document.getElementById(id);}).filter(Boolean);
+  var navLinks=Array.from(document.querySelector('.nav-links').querySelectorAll('a[href^="#"]'));
+  var current='';
+  function onScroll(){
+    var scrollY=window.pageYOffset;
+    sections.forEach(function(sec){
+      if(scrollY>=sec.offsetTop-120){current=sec.id;}
+    });
+    navLinks.forEach(function(a){
+      a.classList.toggle('active',a.getAttribute('href')==='#'+current);
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var target=document.querySelector(a.getAttribute('href'));
+      if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}
+    });
+  });
+})();
+</script>
+</body>
+</html>
