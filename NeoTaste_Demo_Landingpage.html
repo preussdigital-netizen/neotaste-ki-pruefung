@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeoTaste — Demo-Landingpage (Prüfungsartefakt)</title>
+<style>
+:root{--g:#10C95E;--g2:#0A8F45;--mint:#16E07A;--ink:#0C1A12;--mut:#5C6F64;--soft:#F2F8F4;--line:#E2EBE5;--dark:#0B1411;--dcard:#121E18;--dline:#22322a;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Inter,system-ui,sans-serif;color:#0C1A12;background:#fff;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+.disc{background:#0B1411;color:#9FE7BD;font-size:11.5px;text-align:center;padding:7px 14px}
+.disc b{color:#16E07A}
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:20px;color:#0C1A12}
+.logo .n{display:inline-flex;width:30px;height:30px;border-radius:9px;background:#10C95E;color:#04130A;align-items:center;justify-content:center;font-weight:900}
+.navlinks{display:flex;gap:22px;font-size:14px;color:#3A4A40}
+.navlinks span{cursor:default}
+.btn{display:inline-block;background:#10C95E;color:#04130A;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:24px;font-size:14px}
+.btn.dark{background:#0C1A12;color:#fff}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center;padding:34px 0 26px}
+.hero h1{font-size:46px;line-height:1.05;font-weight:900;letter-spacing:-.5px}
+.hero h1 .g{color:#10C95E}
+.hero p.sub{font-size:17px;color:#42554A;margin:16px 0 22px;max-width:460px}
+.badges{display:flex;gap:12px;flex-wrap:wrap}
+.store{display:flex;align-items:center;gap:9px;background:#0C1A12;color:#fff;border-radius:12px;padding:9px 16px;font-size:13px}
+.store b{font-size:15px}
+.phone{justify-self:center;width:250px;height:500px;border-radius:34px;background:#0C1A12;padding:10px;box-shadow:0 24px 60px rgba(12,26,18,.22)}
+.screen{width:100%;height:100%;border-radius:26px;background:linear-gradient(160deg,#10C95E,#0A8F45);position:relative;overflow:hidden;color:#fff}
+.screen .top{padding:18px 16px 8px;font-weight:800}
+.deal{position:absolute;left:14px;right:14px;bottom:14px;background:#fff;color:#0C1A12;border-radius:16px;padding:13px 14px;box-shadow:0 10px 26px rgba(0,0,0,.18)}
+.deal .tag{display:inline-block;background:#10C95E;color:#04130A;font-weight:800;font-size:11px;padding:2px 9px;border-radius:12px}
+.deal h4{font-size:15px;margin:7px 0 2px}
+.deal small{color:#5C6F64;font-size:12px}
+.screen .cards2{position:absolute;left:14px;right:14px;top:70px;display:flex;flex-direction:column;gap:9px}
+.screen .mini{background:rgba(255,255,255,.16);border-radius:12px;padding:9px 11px;font-size:12.5px}
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;background:#F2F8F4;border-radius:18px;padding:20px;margin:8px 0 6px}
+.stat .n{font-size:26px;font-weight:900;color:#0A8F45}
+.stat .l{font-size:12.5px;color:#5C6F64}
+section.blk{padding:42px 0}
+.kick{color:#10C95E;font-weight:800;letter-spacing:.12em;font-size:12px;text-transform:uppercase}
+h2.sec{font-size:30px;font-weight:900;letter-spacing:-.3px;margin:6px 0 4px}
+.lead{color:#5C6F64;font-size:15px;margin-bottom:22px;max-width:640px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{background:#fff;border:1px solid #E2EBE5;border-radius:16px;padding:18px}
+.step .num{width:30px;height:30px;border-radius:9px;background:#10C95E;color:#04130A;font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step h4{font-size:15.5px;margin-bottom:4px}
+.step p{font-size:13px;color:#5C6F64}
+.deals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.dcard{border:1px solid #E2EBE5;border-radius:16px;overflow:hidden}
+.dcard .img{height:90px;background:linear-gradient(135deg,#10C95E,#0A8F45)}
+.dcard .b{padding:13px 15px}
+.dcard .tag{display:inline-block;background:#EAFBF1;color:#0A8F45;font-weight:800;font-size:11px;padding:2px 9px;border-radius:12px}
+.dcard h4{font-size:15px;margin:7px 0 2px}
+.dcard small{color:#5C6F64;font-size:12px}
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fcard{background:#F2F8F4;border-radius:16px;padding:18px}
+.fcard .ic{font-size:22px}
+.fcard h4{font-size:15px;margin:8px 0 3px}
+.fcard p{font-size:12.5px;color:#5C6F64}
+.pods{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pod{display:flex;gap:14px;align-items:center;border:1px solid #E2EBE5;border-radius:16px;padding:14px}
+.pod .play{flex:none;width:46px;height:46px;border-radius:50%;background:#10C95E;color:#04130A;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900}
+.pod h4{font-size:14.5px}.pod small{color:#5C6F64;font-size:12px}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pil{border:1px solid #E2EBE5;border-radius:16px;padding:18px;border-top:3px solid #10C95E}
+.pil h3{font-size:18px;margin-bottom:3px}.pil .t{font-size:11.5px;color:#10C95E;font-weight:800;letter-spacing:.08em}
+.pil ul{list-style:none;margin-top:10px}
+.pil li{font-size:12.8px;color:#3A4A40;padding-left:16px;position:relative;margin-bottom:5px}
+.pil li::before{content:"✓";position:absolute;left:0;color:#10C95E;font-weight:800}
+/* dark backstage */
+.backstage{background:#0B1411;color:#E7F3EB;border-radius:24px;padding:40px 34px;margin:14px 0 0}
+.backstage .kick{color:#16E07A}
+.backstage h2.sec{color:#fff}
+.backstage .lead{color:#9DB3A5}
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.bx{background:#121E18;border:1px solid #22322a;border-radius:14px;padding:15px 16px}
+.bx h4{font-size:14px;color:#16E07A;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.bx li{list-style:none;font-size:12.3px;color:#C4D6CB;padding-left:15px;position:relative;margin-bottom:5px}
+.bx li::before{content:"›";position:absolute;left:0;color:#16E07A}
+.code{margin-top:16px;background:#0A130F;border:1px solid #22322a;border-radius:12px;padding:14px 16px;font-family:Consolas,monospace;font-size:11.5px;color:#9DE7BC;white-space:pre-wrap;overflow:auto}
+.code .c{color:#6F8579}.code .k{color:#7FD7FF}.code .s{color:#E8C879}
+footer{padding:30px 0 50px;color:#5C6F64;font-size:12px;text-align:center}
+footer b{color:#3A4A40}
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{background:#EAFBF1;color:#0A8F45;border-radius:20px;padding:3px 11px;font-size:11.5px;font-weight:600}
+</style></head>
+<body>
+<div class="disc">⚠ <b>Prüfungs-Demo</b> · Nachbau von neotaste.com/de zu Demonstrationszwecken (Case NeoTaste, MoM Academy) — keine offizielle NeoTaste-Seite. Alle Umsetzungen sind geplante/konzeptionelle Artefakte.</div>
+
+<div class="wrap">
+<nav>
+<div class="logo"><span class="n">N</span> NeoTaste</div>
+<div class="navlinks"><span>Deals</span><span>So funktioniert's</span><span>Städte</span><span>Partner werden</span></div>
+<a class="btn" href="#">App holen</a>
+</nav>
+
+<div class="hero">
+<div>
+<div class="kick">Dining-Club · 53 Städte</div>
+<h1>Mehr entdecken.<br><span class="g">Weniger zahlen.</span></h1>
+<p class="sub">Entdecke die besten Restaurants deiner Stadt mit exklusiven 2-für-1-Deals und Direktrabatten. Erst genießen, dann sparen.</p>
+<div class="badges">
+<div class="store">▶ <div><small>Jetzt bei</small><br><b>Google Play</b></div></div>
+<div class="store"> <div><small>Laden im</small><br><b>App Store</b></div></div>
+</div>
+<div class="tagrow"><span class="chip">2-für-1</span><span class="chip">Direktrabatte</span><span class="chip">Keine versteckten Kosten</span></div>
+</div>
+<div class="phone"><div class="screen">
+<div class="top">Hallo, Lena 👋<br><small style="font-weight:400;opacity:.85">Deals in Berlin</small></div>
+<div class="cards2">
+<div class="mini">🍝 Trattoria Verde · 2-für-1 Pasta</div>
+<div class="mini">🥗 Bowl &amp; Greens · 20% Rabatt</div>
+</div>
+<div class="deal"><span class="tag">2-FÜR-1</span><h4>Café Levant</h4><small>Mezze-Platte · 3,1 km · ★ 4,5</small></div>
+</div></div>
+</div>
+</div>
+
+<div class="wrap">
+<div class="statbar">
+<div class="stat"><div class="n">&gt;2 Mio.</div><div class="l">Foodies</div></div>
+<div class="stat"><div class="n">53</div><div class="l">Städte · 4 Länder</div></div>
+<div class="stat"><div class="n">&gt;7.000</div><div class="l">Partner-Restaurants</div></div>
+<div class="stat"><div class="n">4,8★</div><div class="l">8.606 Bewertungen</div></div>
+</div>
+</div>
+
+<div class="wrap"><section class="blk">
+<div class="kick">So funktioniert's</div>
+<h2 class="sec">In 4 Schritten zum ersten Deal</h2>
+<p class="lead">Die Customer Journey im Fokus des Konzepts: vom App-Download über das erste Deal-Erlebnis bis zum Abo-Abschluss.</p>
+<div class="steps">
+<div class="step"><div class="num">1</div><h4>App herunterladen</h4><p>Kostenlos starten, Stadt &amp; Vorlieben wählen.</p></div>
+<div class="step"><div class="num">2</div><h4>Deal finden</h4><p>Restaurants in der Nähe mit 2-für-1 entdecken.</p></div>
+<div class="step"><div class="num">3</div><h4>Einlösen</h4><p>Im Restaurant zeigen, AHA-Moment erleben.</p></div>
+<div class="step"><div class="num">4</div><h4>Abo abschließen</h4><p>Unbegrenzte Deals freischalten.</p></div>
+</div>
+</section></div>
+
+<div class="wrap"><section class="blk" style="padding-top:0">
+<div class="kick">Deals in deiner Stadt</div>
+<h2 class="sec">Heute beliebt in Berlin</h2>
+<p class="lead">Beispiel-Deals (Demo-Daten aus der NeoTaste-FoodFriends Planungs-App).</p>
+<div class="deals">
+<div class="dcard"><div class="img"></div><div class="b"><span class="tag">2-für-1</span><h4>Trattoria Verde</h4><small>Italienisch · 1,2 km · ★ 4,6</small></div></div>
+<div class="dcard"><div class="img"></div><div class="b"><span class="tag">Rabatt 20%</span><h4>Bowl &amp; Greens</h4><small>Vegan/Bowls · 1,6 km · ★ 4,7</small></div></div>
+<div class="dcard"><div class="img"></div><div class="b"><span class="tag">Gratis-Getränk</span><h4>Sakura Sushi</h4><small>Japanisch · 2,4 km · ★ 4,5</small></div></div>
+</div>
+</section></div>
+
+<div class="wrap"><section class="blk" style="padding-top:0">
+<div class="kick">App-Implementierung</div>
+<h2 class="sec">NeoTaste FoodFriends — geplante Erweiterung</h2>
+<p class="lead">Vom Restaurant-Deal zur smarten Ess-Planung: Vorrat, Rezepte und Einkauf verknüpft mit den Deals.</p>
+<div class="feat">
+<div class="fcard"><div class="ic">🥫</div><h4>Vorrats-Tracking</h4><p>Lebensmittel &amp; Ablaufdaten im Blick, weniger wegwerfen.</p></div>
+<div class="fcard"><div class="ic">🍳</div><h4>KI-Rezepte</h4><p>Vorschläge passend zum Vorrat &amp; Budget.</p></div>
+<div class="fcard"><div class="ic">🛒</div><h4>Einkaufsplanung</h4><p>Automatische Liste aus Rezept &amp; Laden-Empfehlung.</p></div>
+<div class="fcard"><div class="ic">🍽️</div><h4>Deal-Matching</h4><p>Restaurant-Deals passend zu Geschmack &amp; Ort.</p></div>
+</div>
+</section></div>
+
+<div class="wrap"><section class="blk" style="padding-top:0">
+<div class="kick">NeoTaste Podcast</div>
+<h2 class="sec">Hör rein — KI &amp; Marketing</h2>
+<p class="lead">Zwei KI-generierte Audio-Episoden (NotebookLM) aus dem Projekt. Player im Live-Hub.</p>
+<div class="pods">
+<div class="pod"><div class="play">▶</div><div><h4>Projekte mit KI gezielt scheitern lassen</h4><small>Episode 1 · NotebookLM Audio · ~6 Min</small></div></div>
+<div class="pod"><div class="play">▶</div><div><h4>Ersetzen KI-Agenten die menschliche Qualitätssicherung?</h4><small>Episode 2 · NotebookLM Audio · ~6 Min</small></div></div>
+</div>
+</section></div>
+
+<div class="wrap"><section class="blk" style="padding-top:0">
+<div class="kick">Sichtbarkeit</div>
+<h2 class="sec">SEO · GEO · AEO</h2>
+<p class="lead">Dreifache Sichtbarkeits-Strategie: klassische Suche, KI-Suchmaschinen und Antwort-Engines.</p>
+<div class="pillars">
+<div class="pil"><div class="t">KLASSISCH</div><h3>SEO</h3><ul><li>On-Page: Title, Meta, H-Struktur, Keywords</li><li>Technisch: Core Web Vitals, Indexierung</li><li>Local SEO: Stadt-Landingpages (53 Städte)</li><li>ASO: App-Store-Optimierung</li></ul></div>
+<div class="pil"><div class="t">KI-SUCHE</div><h3>GEO</h3><ul><li>Generative Engine Optimization</li><li>Zitierbare Fakten-Statements</li><li>llms.txt &amp; strukturierte Inhalte</li><li>Sichtbarkeit in ChatGPT/Gemini/Perplexity</li></ul></div>
+<div class="pil"><div class="t">ANTWORT-ENGINE</div><h3>AEO</h3><ul><li>FAQ-Schema für direkte Antworten</li><li>Konversationelle H2/H3-Fragen</li><li>E-E-A-T-Signale &amp; Trust</li><li>Featured-Snippet-Optimierung</li></ul></div>
+</div>
+</section></div>
+</div>
+
+<div class="wrap"><section class="blk" style="padding-top:0">
+<div class="backstage">
+<div class="kick">Unter der Haube</div>
+<h2 class="sec">Was der Nutzer NICHT sieht</h2>
+<p class="lead">Die technische Optimierungs-Ebene hinter der Seite — genau das, was im Hintergrund für Ranking, Performance &amp; Auffindbarkeit sorgt.</p>
+<div class="bgrid">
+<div class="bx"><h4>🏷️ Meta-Tags</h4><li>Title- &amp; Meta-Description (Keyword-optimiert)</li><li>Open Graph &amp; Twitter Cards</li><li>Canonical, robots, viewport, lang</li></div>
+<div class="bx"><h4>🧩 Structured Data</h4><li>Organization · MobileApplication</li><li>FAQPage · LocalBusiness</li><li>AggregateRating · BreadcrumbList</li></div>
+<div class="bx"><h4>🔗 Off-Page / Backlinks</h4><li>EU-Startups, Handelsblatt, Tagesspiegel</li><li>Startup-Insider (Referring Domains)</li><li>PR &amp; Brand-Mentions</li></div>
+<div class="bx"><h4>⚙️ Technisches SEO</h4><li>sitemap.xml · robots.txt</li><li>hreflang: de · at · en-gb · nl</li><li>HTTPS · saubere URLs · 301-Redirects</li></div>
+<div class="bx"><h4>⚡ Core Web Vitals</h4><li>LCP &lt; 2,5s · INP &lt; 200ms · CLS &lt; 0,1</li><li>Lazy-Loading · WebP/AVIF · CDN</li><li>Code-Splitting · Caching</li></div>
+<div class="bx"><h4>📱 ASO (App-Store)</h4><li>Keyword-Titel &amp; Untertitel</li><li>Screenshots · Ratings-Prompting</li><li>Lokalisierung pro Markt</li></div>
+<div class="bx"><h4>🤖 GEO / AEO</h4><li>llms.txt · FAQ-Schema</li><li>Konversationelle Fragen-Struktur</li><li>Zitierbarkeit für KI-Engines</li></div>
+<div class="bx"><h4>♿ Accessibility</h4><li>Alt-Texte · semantisches HTML5</li><li>ARIA-Labels · Fokus-States</li><li>Kontrast WCAG AA</li></div>
+<div class="bx"><h4>🧭 EEAT &amp; Internal</h4><li>Autor/Impressum/Trust-Signale</li><li>Interne Verlinkung &amp; Silo-Struktur</li><li>Aktualitäts-Signale</li></div>
+</div>
+<div class="code"><span class="c">&lt;!-- Beispiel: Meta + JSON-LD (Auszug) --&gt;</span>
+<span class="k">&lt;title&gt;</span>NeoTaste – 2-für-1 Restaurant-Deals in deiner Stadt<span class="k">&lt;/title&gt;</span>
+<span class="k">&lt;meta</span> name=<span class="s">"description"</span> content=<span class="s">"Entdecke Restaurants mit exklusiven 2-für-1-Deals. Mehr entdecken. Weniger zahlen."</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> rel=<span class="s">"alternate"</span> hreflang=<span class="s">"de"</span> href=<span class="s">"https://neotaste.com/de"</span><span class="k">&gt;</span>
+<span class="k">&lt;script</span> type=<span class="s">"application/ld+json"</span><span class="k">&gt;</span>
+{ <span class="k">"@type"</span>:<span class="s">"MobileApplication"</span>, <span class="k">"name"</span>:<span class="s">"NeoTaste"</span>,
+  <span class="k">"applicationCategory"</span>:<span class="s">"FoodEstablishment"</span>,
+  <span class="k">"aggregateRating"</span>:{<span class="k">"ratingValue"</span>:<span class="s">"4.8"</span>,<span class="k">"reviewCount"</span>:<span class="s">"8606"</span>} }
+<span class="k">&lt;/script&gt;</span></div>
+</div>
+</section></div>
+
+<footer>
+<b>NeoTaste — Demo-Landingpage</b> · Prüfungsartefakt Case NeoTaste · Sven Preuß · MoM Academy 2026<br>
+Nachbau zu Demonstrationszwecken · keine offizielle Verbindung zur NeoTaste GmbH · verifizierte Marktzahlen, geplante Umsetzungen als Konzept gekennzeichnet.
+</footer>
+</body></html>
