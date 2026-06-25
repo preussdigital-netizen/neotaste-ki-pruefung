@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Brain Bibliothek – NeoTaste KI-Prüfungsnachweis | Sven Preuß</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card: #13131a;
+    --border: rgba(255,255,255,.08);
+    --green: #4ade80;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --yellow: #fbbf24;
+    --orange: #fb923c;
+    --text: #e2e8f0;
+    --mut: #64748b;
+    --radius: 12px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.6; }
+
+  header { background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 100%); border-bottom:1px solid rgba(167,139,250,.2); padding:40px 24px 32px; text-align:center; }
+  header h1 { font-size:clamp(22px,4vw,36px); font-weight:800; margin-bottom:8px; }
+  header h1 span { color:var(--purple); }
+  header p { color:var(--mut); font-size:14px; max-width:600px; margin:0 auto; }
+  .badge-row { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+  .badge { padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+  .badge-g { background:rgba(74,222,128,.12); color:var(--green); border:1px solid rgba(74,222,128,.25); }
+  .badge-p { background:rgba(167,139,250,.12); color:var(--purple); border:1px solid rgba(167,139,250,.25); }
+  .badge-b { background:rgba(96,165,250,.12); color:var(--blue); border:1px solid rgba(96,165,250,.25); }
+  .badge-y { background:rgba(251,191,36,.12); color:var(--yellow); border:1px solid rgba(251,191,36,.25); }
+
+  .stats-bar { display:flex; gap:0; background:var(--card); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .stat { flex:1; min-width:100px; padding:18px 20px; text-align:center; border-right:1px solid var(--border); }
+  .stat:last-child { border-right:none; }
+  .stat .num { font-size:28px; font-weight:800; }
+  .stat .lbl { font-size:11px; color:var(--mut); text-transform:uppercase; letter-spacing:.05em; margin-top:2px; }
+
+  main { max-width:1100px; margin:0 auto; padding:32px 20px; }
+
+  section { margin-bottom:48px; }
+  section h2 { font-size:18px; font-weight:700; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+  section h2 span { font-size:20px; }
+
+  .prompt-grid { display:grid; gap:16px; }
+  .prompt-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; transition:border-color .2s; }
+  .prompt-card:hover { border-color:rgba(167,139,250,.3); }
+  .prompt-header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px; }
+  .prompt-title { font-weight:700; font-size:15px; color:var(--purple); }
+  .prompt-category { font-size:11px; color:var(--mut); background:rgba(255,255,255,.05); padding:3px 8px; border-radius:6px; white-space:nowrap; }
+  .prompt-meta { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+  .meta-tag { font-size:11px; padding:2px 8px; border-radius:4px; }
+  .meta-tool { background:rgba(96,165,250,.1); color:var(--blue); }
+  .meta-strategy { background:rgba(74,222,128,.1); color:var(--green); }
+  .meta-quality { background:rgba(251,191,36,.1); color:var(--yellow); }
+  .meta-status { background:rgba(74,222,128,.1); color:var(--green); }
+
+  .prompt-purpose { color:var(--mut); font-size:13px; margin-bottom:10px; font-style:italic; }
+  .prompt-text { background:rgba(0,0,0,.3); border:1px solid rgba(255,255,255,.06); border-radius:8px; padding:14px; font-size:13px; line-height:1.7; color:#cbd5e1; margin-bottom:10px; font-family:'Courier New',monospace; white-space:pre-wrap; }
+  .prompt-result { background:rgba(74,222,128,.04); border-left:3px solid var(--green); padding:10px 14px; border-radius:0 6px 6px 0; font-size:13px; color:#a7f3d0; }
+  .prompt-result strong { color:var(--green); }
+
+  .agent-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+  .agent-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px; }
+  .agent-name { font-weight:700; font-size:14px; color:var(--blue); margin-bottom:6px; }
+  .agent-type-badge { display:inline-block; font-size:10px; padding:2px 8px; border-radius:4px; background:rgba(96,165,250,.1); color:var(--blue); margin-bottom:10px; }
+  .agent-purpose { font-size:13px; color:var(--mut); margin-bottom:8px; }
+  .agent-usecase { font-size:12px; color:#94a3b8; }
+
+  .workflow-grid { display:grid; gap:16px; }
+  .workflow-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; }
+  .workflow-title { font-weight:700; font-size:14px; color:var(--orange); margin-bottom:6px; }
+  .workflow-goal { font-size:13px; color:var(--mut); margin-bottom:12px; border-left:3px solid var(--orange); padding-left:10px; }
+  .workflow-steps { font-size:13px; color:#94a3b8; white-space:pre-line; background:rgba(0,0,0,.2); padding:12px; border-radius:6px; }
+  .workflow-tools { margin-top:10px; font-size:12px; color:var(--mut); }
+
+  .hitl-box { background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(96,165,250,.08)); border:1px solid rgba(167,139,250,.2); border-radius:var(--radius); padding:28px; text-align:center; margin-bottom:40px; }
+  .hitl-box h3 { font-size:20px; font-weight:800; color:var(--purple); margin-bottom:8px; }
+  .hitl-box p { color:var(--mut); font-size:14px; max-width:600px; margin:0 auto; }
+
+  footer { background:var(--card); border-top:1px solid var(--border); padding:24px; text-align:center; color:var(--mut); font-size:13px; margin-top:40px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI Brain <span>Bibliothek</span></h1>
+  <p>NeoTaste KI-Marketingprojekt — Vollständige Dokumentation: Prompts, Agenten & Workflows</p>
+  <p style="margin-top:4px;font-size:13px">Prüfungsnachweis KI-Kompetenz · Modul Online-/Performance-Marketing & KI · MOD Education 2026</p>
+  <div class="badge-row">
+    <span class="badge badge-g">10 Prompts dokumentiert</span>
+    <span class="badge badge-b">6 Agenten/GPTs eingesetzt</span>
+    <span class="badge badge-p">5 Workflows dokumentiert</span>
+    <span class="badge badge-y">Human-in-the-Loop durchgehend</span>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><div class="num" style="color:var(--purple)">10</div><div class="lbl">Prompts</div></div>
+  <div class="stat"><div class="num" style="color:var(--blue)">6</div><div class="lbl">Agenten/GPTs</div></div>
+  <div class="stat"><div class="num" style="color:var(--orange)">5</div><div class="lbl">Workflows</div></div>
+  <div class="stat"><div class="num" style="color:var(--green)">P-NEO-000<br style="font-size:0">–016</div><div class="lbl">Prompt-IDs</div></div>
+  <div class="stat"><div class="num" style="color:var(--yellow)">100%</div><div class="lbl">Human-geprüft</div></div>
+</div>
+
+<main>
+
+  <div class="hitl-box">
+    <h3>Human-in-the-Loop Prinzip</h3>
+    <p>Alle KI-Outputs in diesem Projekt wurden von Sven Preuß manuell geprüft, korrigiert und freigegeben. KI = Werkzeug. Mensch = Entscheidung. Kein Content wurde ohne menschliche Kontrolle veröffentlicht oder abgegeben.</p>
+  </div>
+
+  <section>
+    <h2><span>💬</span> Prompt-Bibliothek — P-NEO-000 bis P-NEO-016</h2>
+    <div class="prompt-grid">
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">P-NEO-000 · System-Briefing Custom GPT Paulina</div>
+          <div class="prompt-category">System-Prompt</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">ChatGPT-4o · Custom GPT</span>
+          <span class="meta-tag meta-strategy">ReAct</span>
+          <span class="meta-tag meta-quality">⭐ 5/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">Konfiguration des Custom GPT 'Paulina' als strategischer Marketingmanager für NeoTaste</div>
+        <div class="prompt-text">ROLLE: Du bist Paulina — strategischer Marketingmanager mit KI-Kompetenz für NeoTaste. KONTEXT: NeoTaste = Restaurant-Deal-App, Abo-Modell €6,99/Monat, Ziel: App-Download → Abo-Abschluss nach erstem Deal-Erlebnis. Kernhebel: Aktivierung innerhalb 72h nach Download. AKTION: Erstelle strukturierte Marketing-Outputs entlang des AARRR-Funnels. ERWARTUNG: Funnel mit konkreten Kanälen, KI-Einsatz und KPIs je Phase. Kein generischer Output. Alles Case-bezogen. Annahmen als [ANNAHME] markieren. Keine erfundenen Zahlen. Human-in-the-Loop: KI liefert Entwurf → Mensch prüft → Mensch gibt frei.</div>
+        <div class="prompt-result"><strong>Ergebnis:</strong> Custom GPT Paulina erfolgreich konfiguriert — liefert Case-bezogene Outputs ohne generische Floskeln</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">P-NEO-001 · Unternehmensanalyse NeoTaste Faktencheck</div>
+          <div class="prompt-category">Recherche-Prompt</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">Perplexity + ChatGPT-4o</span>
+          <span class="meta-tag meta-strategy">Analyseprompt</span>
+          <span class="meta-tag meta-quality">⭐ 5/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">Faktenbasierte Unternehmensanalyse NeoTaste — Quellenverifizierung</div>
+        <div class="prompt-text">Analysiere NeoTaste als Gastronomie-Deal-App für den deutschen Markt. Recherchiere faktenbasiert: Nutzeranzahl, Städte, Partnerrestaurants, Finanzierung, App Store Bewertungen. Nutze ausschließlich belegbare Quellen (neotaste.com, App Store, Crunchbase). Markiere alle Annahmen als [ANNAHME]. Keine erfundenen Zahlen.</div>
+        <div class="prompt-result"><strong>Ergebnis:</strong> Steckbrief erstellt: >2 Mio. Nutzer, 53 Städte, €21 Mio. Series A, 4,8★ App Store — alle Fakten belegt. Korrektur: 1 Mio. → >2 Mio., Städte 40 → 53</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">P-NEO-003 · Persona-Erstellung Zielgruppe NeoTaste</div>
+          <div class="prompt-category">Zielgruppenanalyse</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">ChatGPT-4o · Custom GPT Paulina</span>
+          <span class="meta-tag meta-strategy">Generate-then-Evaluate</span>
+          <span class="meta-tag meta-quality">⭐ 4/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">KI-gestützte Persona-Entwicklung für die NeoTaste Kernzielgruppe</div>
+        <div class="prompt-text">Erstelle eine detaillierte Marketing-Persona für den typischen NeoTaste-Nutzer in deutschen Großstädten. Basis: App Store Bewertungen, Social Media Nutzerkommentare, Demografie urbaner Food-Enthusiasten. Persona: Name, Alter, Demografie, Motivation, Pain Points, Touchpoints, Customer Journey. Alle demographischen Annahmen als [ANNAHME] kennzeichnen. Keine echten Nutzerdaten verwenden.</div>
+        <div class="prompt-result"><strong>Ergebnis:</strong> Persona 'Lena M., 27' erstellt: Urban Foodie, Digital Native, Deal-affin. 25–35 Jahre, urban, berufstätig. Pain Points: Entscheidungsparalyse, hohe Restaurantpreise. Journey: Sieht Reel → lädt App → nutzt ersten Deal → konvertiert zum Abo. Als [ANNAHME] markiert.</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">P-NEO-005 · RACE-Framework Kampagnenstrategie 90 Tage</div>
+          <div class="prompt-category">Kampagnenstrategie</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">ChatGPT-4o · Custom GPT Paulina</span>
+          <span class="meta-tag meta-strategy">ReAct</span>
+          <span class="meta-tag meta-quality">⭐ 5/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">Entwicklung einer 90-Tage-Kampagnenstrategie entlang des AARRR-Funnels</div>
+        <div class="prompt-text">Erstelle eine 90-Tage-Kampagnenstrategie für NeoTaste entlang des AARRR-Funnels. Kanäle, KI-Einsatz und KPIs je Phase definieren. AWARENESS: TikTok Organic + Instagram Reels. CONSIDERATION: Instagram Stories + TikTok Paid. CONVERSION: Google App Campaigns + Meta Ads. RETENTION: E-Mail Onboarding + Push-Notifications. Claim-Vorschläge: A/B-Test zwischen 2 Varianten. SMART-Ziele: +15% App-Installs in Top-5-Städten, CPI ≤ €2,50, Trial-to-Paid 8% → 12%.</div>
+        <div class="prompt-result"><strong>Ergebnis:</strong> Kampagne 'Dein erstes Dinner. Dein erster Deal.' entwickelt. 90 Tage Laufzeit. AARRR-Funnel mit 4 Phasen. Variante B als Human-entschiedener Gewinner. Human-in-the-Loop: alle KI-Outputs manuell geprüft.</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">P-NEO-008 · A/B Content Hook-Varianten TikTok/Instagram</div>
+          <div class="prompt-category">Content-Erstellung</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">ChatGPT-4o · Claude Sonnet</span>
+          <span class="meta-tag meta-strategy">Generate-then-Evaluate</span>
+          <span class="meta-tag meta-quality">⭐ 5/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">Erstellung von 3 Hook-Varianten für TikTok/Instagram-Content A/B-Test</div>
+        <div class="prompt-text">Erstelle 3 verschiedene Hook-Varianten für NeoTaste TikTok und Instagram Reels. Ziel: App-Download triggern, emotionalen Hook setzen, lokalen Bezug herstellen. Variante A: Generischer Ansatz (als Negativ-Beispiel). Variante B: Emotional + lokaler Bezug + konkreter Value Prop. Variante C: FOMO-Ansatz. Alle als #KIgeneriert kennzeichnen. Mensch entscheidet welche Variante live geht.</div>
+        <div class="prompt-result"><strong>Ergebnis:</strong> 3 Hooks erstellt. Variante A verworfen (zu generisch). Variante B gewählt: 'Dein erstes Dinner. Dein erster Deal. Entdecke Berlins beste Restaurants — mit 2 für 1.' Lokaler Bezug, emotionaler Hook, klarer CTA.</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">P-NEO-010 · E-Mail Onboarding Sequenz 5-Flow</div>
+          <div class="prompt-category">E-Mail Marketing</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">ChatGPT-4o · Custom GPT Paulina</span>
+          <span class="meta-tag meta-strategy">Generate-then-Evaluate</span>
+          <span class="meta-tag meta-quality">⭐ 4/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">KI-gestützte Erstellung einer 5-stufigen E-Mail-Onboarding-Sequenz für neue NeoTaste-Nutzer</div>
+        <div class="prompt-text">Erstelle eine 5-E-Mail-Onboarding-Sequenz für neue NeoTaste-Nutzer (RETENTION-Phase). Ziel: Aktivierung innerhalb 72h, Trial-to-Paid-Conversion steigern. E-Mail 1 (Tag 0): Willkommen + ersten Deal erklären. E-Mail 2 (Tag 1): Tipp wie man beste Deals findet. E-Mail 3 (Tag 3): Personalisierte Restaurantempfehlung. E-Mail 4 (Tag 5): Social Proof + Bewertungen. E-Mail 5 (Tag 7): Premium-Upgrade CTA mit Vorteilsargumentation.</div>
+        <div class="prompt-result"><strong>Ergebnis:</strong> 5-E-Mail-Sequenz erstellt. Fokus: Aktivierung 72h nach Download. Sequenz #KIgeneriert gekennzeichnet, menschlich überprüft und für gut befunden.</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">P-NEO-013 · Risiko-Analyse DSGVO & EU AI Act NeoTaste</div>
+          <div class="prompt-category">Risiko-Analyse</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">Claude Sonnet</span>
+          <span class="meta-tag meta-strategy">Self-Critique</span>
+          <span class="meta-tag meta-quality">⭐ 5/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">Systematische Analyse rechtlicher Risiken beim KI-Einsatz im NeoTaste-Marketingprojekt</div>
+        <div class="prompt-text">Analysiere alle DSGVO- und EU AI Act-relevanten Risiken im NeoTaste KI-Marketingprojekt. Kategorien: Halluzination, DSGVO-Verstoß, Urheberrecht, Bias, Dark Patterns, Kennzeichnungspflicht. Je Risiko: Beschreibung, Schweregrad (hoch/mittel/niedrig), Maßnahme. Human-in-the-Loop als übergreifende Schutzmaßnahme dokumentieren.</div>
+        <div class="prompt-result"><strong>Ergebnis:</strong> 6 Risiken identifiziert: Halluzination (hoch), DSGVO (hoch), Urheberrecht (mittel), Kennzeichnung (mittel), Bias (mittel), Dark Patterns (niedrig). EU AI Act: Projekt als Minimal-Risk eingestuft.</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">P-NEO-016 · Selbstreflexion & Fazit KI im Marketing</div>
+          <div class="prompt-category">Reflexion & Fazit</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">Claude Sonnet</span>
+          <span class="meta-tag meta-strategy">Self-Critique</span>
+          <span class="meta-tag meta-quality">⭐ 5/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">KI-gestützte Reflexion über den Einsatz von KI im gesamten Marketingprojekt</div>
+        <div class="prompt-text">Reflektiere den KI-Einsatz im gesamten NeoTaste-Marketingprojekt ehrlich und kritisch. Was hat KI geleistet? Was hat der Mensch entschieden? Wo waren die Grenzen der KI erkennbar? Fazit: Rolle von KI als Werkzeug vs. Ersatz menschlichen Urteils. Beispiele aus dem konkreten Projekt nennen.</div>
+        <div class="prompt-result"><strong>Ergebnis:</strong> Fazit: 'KI macht Marketing schneller. Urteil macht es gut.' KI unterstützt: Texterstellung, Ideenentwicklung, Varianten, Analyse, Recherche. Mensch entscheidet: Strategie, Ziele, Qualitätskontrolle, Ethik, Freigabe, Verantwortung.</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">NeoTaste Marktanalyse quellenbasiert</div>
+          <div class="prompt-category">Marktanalyse</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">ChatGPT GPT-4</span>
+          <span class="meta-tag meta-strategy">Analyseprompt</span>
+          <span class="meta-tag meta-quality">⭐ 4/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">Strukturierte Marktanalyse mit Quellenprüfung und Unsicherheitsmarkierung</div>
+        <div class="prompt-text">Erstelle eine detaillierte Marktanalyse für NeoTaste im deutschen Gastro-Tech-Markt. Berücksichtige: Marktgröße, Wettbewerber, Zielgruppen, Trends. Kennzeichne jede Aussage als: [belegt], [Annahme] oder [offen]. Nenne Quellen oder markiere Datenlücken.</div>
+        <div class="prompt-result"><strong>Zweck:</strong> Strukturierte Marktanalyse mit Quellenprüfung und Unsicherheitsmarkierung</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">KI-Ergebnisprüfung auf Halluzinationen</div>
+          <div class="prompt-category">Qualitätskontrolle</div>
+        </div>
+        <div class="prompt-meta">
+          <span class="meta-tag meta-tool">Claude Sonnet</span>
+          <span class="meta-tag meta-strategy">Self-Critique</span>
+          <span class="meta-tag meta-quality">⭐ 5/5</span>
+          <span class="meta-tag meta-status">✓ final</span>
+        </div>
+        <div class="prompt-purpose">Systematische Prüfung von KI-Outputs auf Halluzinationen und unbelegte Aussagen</div>
+        <div class="prompt-text">Prüfe den folgenden KI-generierten Text auf: 1) Halluzinationen (erfundene Fakten) 2) Unbelegte Behauptungen 3) Logikfehler 4) Fehlende Quellenangaben. Markiere jede Stelle mit [HALLUZINATION], [UNBELEGT], [LOGIKFEHLER] oder [QUELLE FEHLT]. Erstelle eine korrigierte Version.</div>
+        <div class="prompt-result"><strong>Zweck:</strong> Qualitätssicherungs-Prompt — eingesetzt nach jedem größeren KI-Output als Gegenprüfung</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2><span>🤖</span> Eingesetzte Agenten & GPTs</h2>
+    <div class="agent-grid">
+
+      <div class="agent-card">
+        <div class="agent-name">Custom GPT Paulina</div>
+        <span class="agent-type-badge">Custom GPT</span>
+        <div class="agent-purpose">Strategischer Marketingmanager mit NeoTaste-Kontext — Primary Agent für Kampagnenentwicklung und Content-Erstellung</div>
+        <div class="agent-usecase">💡 Kampagnenentwicklung, Content-Erstellung, E-Mail-Sequenzen, A/B-Varianten, Persona-Entwicklung</div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-name">Claude Sonnet (Anthropic)</div>
+        <span class="agent-type-badge">Assistent</span>
+        <div class="agent-purpose">Analyse, Gegenprüfung und kritische Bewertung von KI-Outputs — Qualitätssicherungs-Instanz im Workflow</div>
+        <div class="agent-usecase">💡 Risiko-Analyse, Dokumentation, Gegenprüfung ChatGPT-Outputs, Reflexions-Texte</div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-name">ChatGPT-4o (OpenAI)</div>
+        <span class="agent-type-badge">Custom GPT</span>
+        <div class="agent-purpose">Universeller KI-Assistent für Texterstellung, Analyse, Code und strukturierte Outputs</div>
+        <div class="agent-usecase">💡 Content-Erstellung, A/B-Varianten, Personas, Kampagnenstrukturen</div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-name">NotebookLM (Google)</div>
+        <span class="agent-type-badge">Assistent</span>
+        <div class="agent-purpose">Quellenbasierte Analyse und Faktencheck gegen eigene hochgeladene Dokumente</div>
+        <div class="agent-usecase">💡 Faktencheck gegen Kursmaterial, Quellenanalyse, Präsentationsvorbereitung</div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-name">NeoProof KI-Datensortierer</div>
+        <span class="agent-type-badge">Base44 Agent</span>
+        <div class="agent-purpose">Automatische Analyse und Sortierung eingehender Daten in die richtigen Bibliotheksentitäten der NeoTaste AI Brain Library</div>
+        <div class="agent-usecase">💡 Upload-Batch-Verarbeitung, neue Quellen einpflegen, Prompts dokumentieren</div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-name">Paulina Prompt Architekt Elite</div>
+        <span class="agent-type-badge">Custom GPT</span>
+        <div class="agent-purpose">Entwicklung und Optimierung von Prompts für KI-Marketinganalysen</div>
+        <div class="agent-usecase">💡 Prompt-Entwicklung, Qualitätskontrolle von KI-Outputs, Prüfungsvorbereitung</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2><span>⚙️</span> Dokumentierte KI-Workflows</h2>
+    <div class="workflow-grid">
+
+      <div class="workflow-card">
+        <div class="workflow-title">Human-in-the-Loop Marketing-Workflow (5 Schritte)</div>
+        <div class="workflow-goal">Qualitätssicherung aller KI-generierten Marketing-Outputs — kein KI-Content ohne menschliche Freigabe</div>
+        <div class="workflow-steps">1. BRIEFING: Mensch definiert Ziel, Kanal, Zielgruppe und Rahmenbedingungen
+2. PROMPT: Strukturierter Prompt via RACE-Framework an Custom GPT Paulina
+3. KI-OUTPUT: ChatGPT-4o generiert Texte, Hooks, Ad-Varianten
+4. PRÜFUNG: Mensch führt Faktencheck, Stil- und Datenschutzprüfung durch
+5. FREIGABE: Final entscheidet immer der Mensch — KI liefert Entwurf</div>
+        <div class="workflow-tools">🔧 ChatGPT-4o · Custom GPT Paulina · Claude Sonnet · Adobe Firefly</div>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">AARRR-Funnel Kampagnenstrategie NeoTaste</div>
+        <div class="workflow-goal">+15% organische App-Installs in Top-5-Städten + Trial-to-Paid Conversion 8% → 12% innerhalb 90 Tage</div>
+        <div class="workflow-steps">AWARENESS: TikTok Organic + Instagram Reels (ChatGPT Hook-Texte, Claude A/B-Varianten)
+CONSIDERATION: Instagram Stories + TikTok Paid (ChatGPT Ad-Texte, Adobe Firefly Visuals)
+CONVERSION: Google App Campaigns + Meta Ads (ChatGPT CTA-Optimierung, KI-Targeting)
+RETENTION: E-Mail Onboarding + Push-Notifications (ChatGPT Sequenz-Texte, Personalisierung)</div>
+        <div class="workflow-tools">🔧 ChatGPT-4o · Claude Sonnet · Adobe Firefly · Meta Ads Manager · Google App Campaigns</div>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">Quellenprotokoll & Faktenstatus-Workflow</div>
+        <div class="workflow-goal">Lückenlose Dokumentation aller verwendeten Quellen mit BELEGT/ANNAHME/UNBELEGT-Status</div>
+        <div class="workflow-steps">1. Aussage/Datenpunkt identifizieren
+2. Primärquelle recherchieren (direkt auf neotaste.com, App Store, etc.)
+3. Status setzen: BELEGT (direkte Quelle), ANNAHME (KI-generiert, menschlich geprüft), UNBELEGT (nicht verifiziert)
+4. Screenshot falls möglich
+5. In Quellenprotokoll dokumentieren (S-001 bis S-016)</div>
+        <div class="workflow-tools">🔧 Perplexity · NotebookLM · direkte Website-Recherche</div>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">Upload → Sortierung → Quellenprüfung → Freigabe</div>
+        <div class="workflow-goal">Strukturierter Prozess von Dateiupload bis zur Freigabe für die Prüfung</div>
+        <div class="workflow-steps">1. Dateien im Upload-Batch hochladen
+2. Automatische Vorsortierung starten
+3. Sortiervorschlag manuell prüfen
+4. Kategorie bestätigen oder korrigieren
+5. Quellenprüfung durchführen
+6. Evidenzstatus setzen
+7. Human Review durchführen
+8. Freigabe oder Ablehnung</div>
+        <div class="workflow-tools">🔧 Base44 · NotebookLM</div>
+      </div>
+
+      <div class="workflow-card">
+        <div class="workflow-title">Umgang mit KI-Halluzinationen</div>
+        <div class="workflow-goal">Systematische Erkennung und Korrektur von KI-Halluzinationen</div>
+        <div class="workflow-steps">1. KI-Output generieren
+2. Output systematisch auf Faktenbehauptungen prüfen
+3. Jede Behauptung mit Quelle abgleichen
+4. Nicht belegte Aussagen markieren
+5. Halluzinationen dokumentieren
+6. Fix-Prompt anwenden
+7. Korrigierte Version prüfen
+8. Ergebnis freigeben oder iterieren</div>
+        <div class="workflow-tools">🔧 ChatGPT · Claude · NotebookLM</div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>Sven Preuß</strong> · NeoTaste KI-Marketingprojekt · MOD Education 2026 · 90/100 Punkte<br>
+  preuss.digital@gmail.com · <a href="https://marketingmitsven.de" style="color:var(--purple)">marketingmitsven.de</a>
+</footer>
+
+</body>
+</html>
