@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projektnachweis NeoTaste — Sven Preuß</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI', Georgia, serif; background:#f8f6f1; color:#1a1a2e; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:40px 20px; }
+.letter { background:#fff; max-width:720px; width:100%; padding:60px; box-shadow:0 4px 40px rgba(0,0,0,.08); border-top:4px solid #1a1a2e; }
+.sender { font-size:13px; color:#666; margin-bottom:40px; line-height:1.8; }
+.sender strong { color:#1a1a2e; font-size:15px; }
+.date { font-size:13px; color:#666; margin-bottom:32px; }
+.subject { font-size:18px; font-weight:700; color:#1a1a2e; margin-bottom:28px; padding-bottom:16px; border-bottom:1px solid #e8e4dc; }
+.body { font-size:15px; line-height:1.85; color:#2d2d2d; }
+.body p { margin-bottom:16px; }
+.files-box { margin:32px 0; background:#f4f1eb; border-left:4px solid #1a1a2e; padding:24px 28px; }
+.files-box h3 { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#666; margin-bottom:16px; }
+.file-link { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #e0dbd0; text-decoration:none; color:#1a1a2e; transition:color .15s; }
+.file-link:last-child { border-bottom:none; }
+.file-link:hover { color:#5b4fcf; }
+.file-link .icon { font-size:20px; flex:none; }
+.file-link .info { flex:1; }
+.file-link .name { font-weight:600; font-size:14px; }
+.file-link .desc { font-size:12px; color:#888; margin-top:2px; }
+.file-link .arrow { color:#bbb; font-size:16px; }
+.apps-box { margin:28px 0; padding:20px 24px; background:#1a1a2e; color:#fff; }
+.apps-box h3 { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:#aaa; margin-bottom:14px; }
+.app-link { display:inline-block; margin:4px 6px 4px 0; padding:5px 12px; background:rgba(255,255,255,.1); color:#e8e8e8; text-decoration:none; font-size:12px; border:1px solid rgba(255,255,255,.15); }
+.app-link:hover { background:rgba(255,255,255,.2); }
+.app-link.draft { opacity:.65; border-style:dashed; }
+.closing { margin-top:32px; font-size:15px; line-height:1.85; }
+.sig { margin-top:28px; padding-top:20px; border-top:1px solid #e8e4dc; }
+.sig strong { display:block; font-size:16px; margin-bottom:4px; }
+.sig a { color:#5b4fcf; text-decoration:none; font-size:13px; }
+.badge { display:inline-block; background:#1a1a2e; color:#fff; font-size:11px; padding:3px 10px; margin-top:8px; font-weight:600; letter-spacing:.05em; }
+</style>
+</head>
+<body>
+<div class="letter">
+  <div class="sender">
+    <strong>Sven Preuß</strong><br>
+    marketingmitsven@gmail.com<br>
+    marketingmitsven.de
+  </div>
+  <div class="date">Tettnang, Juni 2026</div>
+  <div class="subject">KI-Abschlussprojekt NeoTaste — Projektnachweis &amp; kurze Frage</div>
+  <div class="body">
+    <p>Hallo Alex,</p>
+    <p>anbei der vollständige Nachweis meines KI-Abschlussprojekts zum NeoTaste-Case im Rahmen des Kurses Online-/Performance-Marketing &amp; KI an der MOD Education.</p>
+    <p>Das Projekt umfasst eine faktenbasierte Markt- und Zielgruppenanalyse, eine 90-Tage-Kampagnenstrategie entlang des AARRR-Funnels, sieben gebaute Apps &amp; Tools (Natural Language Prompting / Vibe Coding), vollständig dokumentierte Prompts mit Human-in-the-Loop-Nachweis sowie eine interaktive Projektdokumentation.</p>
+    <div class="files-box">
+      <h3>Dateien in diesem Ordner</h3>
+      <a class="file-link" href="KI_Pruefung_Statement_AKTUELL.html">
+        <span class="icon">📄</span>
+        <span class="info">
+          <span class="name">KI_Pruefung_Statement_AKTUELL.html</span>
+          <span class="desc">Hauptdokument — vollständige Projektanalyse, Statement &amp; Erkenntnisse</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="file-link" href="NeoProof_Cockpit.html">
+        <span class="icon">💬</span>
+        <span class="info">
+          <span class="name">NeoProof_Cockpit.html</span>
+          <span class="desc">AI Brain Bibliothek — alle dokumentierten Prompts, Agenten &amp; Workflows</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="file-link" href="NeoTaste_Demo_Landingpage.html">
+        <span class="icon">🌐</span>
+        <span class="info">
+          <span class="name">NeoTaste_Demo_Landingpage.html</span>
+          <span class="desc">Demo-Landingpage — konzeptioneller Nachbau mit SEO/GEO/AEO-Struktur</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+    <div class="apps-box">
+      <h3>Live-Apps &amp; Tools (im Browser öffnen)</h3>
+      <a class="app-link" href="https://neotaste-ai-marketing-hub.base44.app" target="_blank">AI Marketing Hub ↗</a>
+      <a class="app-link" href="https://ai-prompt-brain.base44.app" target="_blank">AI Brain Bibliothek ↗</a>
+      <a class="app-link" href="https://growth-marketing-content-cockpit.base44.app" target="_blank">Content Cockpit ↗</a>
+      <a class="app-link" href="https://zenith-focus-burrowing-flow.base44.app" target="_blank">Workflow Cockpit ↗</a>
+      <a class="app-link" href="https://growth-intelligence-cockpit-neotaste.base44.app" target="_blank">Growth Intelligence ↗</a>
+      <a class="app-link" href="https://neotaste-ai-foodfriend.base44.app" target="_blank">FoodFriend ↗</a>
+      <a class="app-link" href="https://preussdigital-netizen.github.io/neotaste-launch-tower/" target="_blank">Launch Control Tower ↗</a>
+      <a class="app-link draft" href="https://command-center-neotaste-projekt.base44.app" target="_blank">KI Command Center ↗ (Entwurf)</a>
+    </div>
+    <p>Dazu eine kurze Frage: Darf ich das NeoTaste-Projekt als Case Study in mein Portfolio (<a href="https://marketingmitsven.de" target="_blank">marketingmitsven.de</a>) aufnehmen? Ich würde selbstverständlich nur eigene Inhalte und keine vertraulichen Prüfungsdetails zeigen.</p>
+  </div>
+  <div class="closing"><p>Mit freundlichen Grüßen</p></div>
+  <div class="sig">
+    <strong>Sven Preuß</strong>
+    <a href="mailto:marketingmitsven@gmail.com">marketingmitsven@gmail.com</a><br>
+    <a href="https://marketingmitsven.de" target="_blank">marketingmitsven.de</a>
+    <div><span class="badge">MOD Education · KI-Abschlussprojekt 2026 · 90/100 Punkte</span></div>
+  </div>
+</div>
+</body>
+</html>
